@@ -10,43 +10,6 @@
 #include <stdlib.h>
 #include "header.h"
 
-static sfBool check_click(b_content_t *button,
-    sfMouseButtonEvent *event)
-{
-    sfFloatRect tmp_rect = sfRectangleShape_getGlobalBounds(button->rect);
-
-    if (sfFloatRect_contains(&tmp_rect, event->x, event->y)) {
-        button->state = PRESSED;
-        return sfTrue;
-    }
-    return sfFalse;
-}
-
-static sfBool is_hover(b_content_t *button, sfMouseMoveEvent *event)
-{
-    sfFloatRect tmp_rect = sfRectangleShape_getGlobalBounds(button->rect);
-
-    if (sfFloatRect_contains(&tmp_rect, event->x, event->y)) {
-        button->state = HOVER;
-        return sfTrue;
-    }
-    return sfFalse;
-}
-
-b_content_t *init_button(sfVector2f position, sfVector2f size)
-{
-    sfRectangleShape *rect = sfRectangleShape_create();
-    b_content_t *button = malloc(sizeof(button));
-
-    sfRectangleShape_setPosition(rect, position);
-    sfRectangleShape_setSize(rect, size);
-    sfRectangleShape_setFillColor(rect, sfWhite);
-    button->rect = rect;
-    button->is_clicked = &check_click;
-    button->is_hover = &is_hover;
-    return button;
-}
-
 static void analyse_events(sfRenderWindow *win,
     b_content_t *button, sfEvent event)
 {
@@ -55,13 +18,13 @@ static void analyse_events(sfRenderWindow *win,
         sfRenderWindow_close(win);
     button->state = RELEASED;
     if (event.type == sfEvtMouseMoved) {
-        if (button->is_hover(button, &event.mouseMove))
+        if ((*button->is_hover)(button, &event.mouseMove))
             sfRectangleShape_setFillColor(button->rect, sfGreen);
         else
             sfRectangleShape_setFillColor(button->rect, sfBlack);
     }
     if (event.type == sfEvtMouseButtonPressed) {
-        if (button->is_clicked(button, &event.mouseButton))
+        if ((*button->is_clicked)(button, &event.mouseButton))
             printf("Hello\n");
     }
 }
@@ -77,7 +40,11 @@ static int loop(w_data_t *w_data)
 {
     sfEvent event;
 
-    w_data->w_content->menu = add_option_drop_menu(w_data->w_content->menu);
+    draw_line(w_data->w_content->image, (sfVector2i){105, 50}, 150, sfRed);
+    draw_line(w_data->w_content->image, (sfVector2i){105, 51}, 150, sfRed);
+    draw_line(w_data->w_content->image, (sfVector2i){105, 52}, 150, sfRed);
+    draw_line(w_data->w_content->image, (sfVector2i){105, 53}, 150, sfRed);
+    sfTexture_updateFromImage(w_data->w_content->texture, w_data->w_content->image, 0, 0);
     while (sfRenderWindow_isOpen(w_data->win)) {
         sfRenderWindow_pollEvent(w_data->win, &event);
         analyse_events(w_data->win,

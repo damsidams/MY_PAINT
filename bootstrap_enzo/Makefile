@@ -13,6 +13,7 @@ SRC     =	src/main.c	\
 		src/drop_menu.c	\
 		src/init.c	\
 		src/color.c	\
+		src/edit.c	\
 
 CRFLAGS	=	--coverage -lcriterion
 

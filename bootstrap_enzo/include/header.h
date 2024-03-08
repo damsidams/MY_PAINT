@@ -8,6 +8,9 @@
 #ifndef HEADER_H
     #define HEADER_H
 
+    #include <SFML/Graphics.h>
+    #include "my.h"
+
     #define WIN_HEIGHT 1080
     #define WIN_WIDTH 1920
     #define IS_PRESSED(button) (button->state == PRESSED)
@@ -16,8 +19,8 @@
     #define ERROR 84
     #define SUCCESS 0
     #define BITS_PER_PIXEL 32
-
-    #include <SFML/Graphics.h>
+    #define FONT_SIZE 16
+    #define FONTPATH "src/assets/font.ttf"
 
 enum e_gui_state {
     NONE = 0,
@@ -26,8 +29,15 @@ enum e_gui_state {
     RELEASED
 };
 
+enum init_mode {
+    Text,
+    Image
+};
+
 typedef struct button_content_s {
     sfRectangleShape *rect;
+    sfText *txt;
+    sfSprite *sprite;
     sfBool (*is_clicked)(struct button_content_s*, sfMouseButtonEvent*);
     sfBool (*is_hover)(struct button_content_s*, sfMouseMoveEvent*);
     enum e_gui_state state;
@@ -64,14 +74,18 @@ typedef struct w_data_s {
 /*functions definition*/
 
 //-> init
-
 b_content_t *init_button(sfVector2f position, sfVector2f size);
 drop_menu_t *create_drop_menu(sfVector2f position, sfVector2f size);
-drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu);
+drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
+    enum init_mode);
 sfUint8 *init_pixel_array(void);
 w_data_t *init_win(void);
 
-//display
+// --> text
+sfBool set_rect_text(b_content_t *button, sfRectangleShape *rect,
+    char const *text, unsigned int font_size);
+
+// --> display
 int display_options(sfRenderWindow *win, drop_menu_t *menu);
 
 #endif

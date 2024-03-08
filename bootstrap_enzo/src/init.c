@@ -9,6 +9,44 @@
 #include <SFML/Graphics.h>
 #include "header.h"
 
+sfBool check_click(b_content_t *button,
+    sfMouseButtonEvent *event)
+{
+    sfFloatRect tmp_rect = sfRectangleShape_getGlobalBounds(button->rect);
+
+    if (sfFloatRect_contains(&tmp_rect, event->x, event->y)) {
+        button->state = PRESSED;
+        return sfTrue;
+    }
+    return sfFalse;
+}
+
+sfBool is_hover(b_content_t *button, sfMouseMoveEvent *event)
+{
+    sfFloatRect tmp_rect = sfRectangleShape_getGlobalBounds(button->rect);
+
+    if (sfFloatRect_contains(&tmp_rect, event->x, event->y)) {
+        button->state = HOVER;
+        return sfTrue;
+    }
+    return sfFalse;
+}
+
+b_content_t *init_button(sfVector2f position, sfVector2f size)
+{
+    sfRectangleShape *rect = sfRectangleShape_create();
+    b_content_t *button = malloc(sizeof(b_content_t));
+
+    sfRectangleShape_setPosition(rect, position);
+    sfRectangleShape_setSize(rect, size);
+    sfRectangleShape_setFillColor(rect, sfBlue);
+    button->rect = rect;
+    button->is_clicked = &check_click;
+    button->is_hover = &is_hover;
+    button->txt = NULL;
+    return button;
+}
+
 static win_content_t *init_win_content(void)
 {
     win_content_t *wc = malloc(sizeof(win_content_t));
@@ -23,7 +61,6 @@ static win_content_t *init_win_content(void)
     wc->texture = sfTexture_createFromImage(wc->image, &image_rect);
     sfSprite_setTexture(wc->sprite, wc->texture, sfTrue);
     sfSprite_setTextureRect(wc->sprite, image_rect);
-    printf("image is innit\n");
     return wc;
 }
 
