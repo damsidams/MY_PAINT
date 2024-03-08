@@ -11,6 +11,8 @@ MAIN	=
 
 SRC     =	src/main.c	\
 		src/drop_menu.c	\
+		src/init.c	\
+		src/color.c	\
 
 CRFLAGS	=	--coverage -lcriterion
 

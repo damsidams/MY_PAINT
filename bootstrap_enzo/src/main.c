@@ -65,32 +65,46 @@ static void analyse_events(sfRenderWindow *win, struct s_gui_object *button, sfE
 
 }
 
-static int loop(struct s_gui_drop_menu *menu)
+static void draw_line(sfImage *image, sfVector2i initial_pos, int line_length, sfColor color)
 {
-    sfRenderWindow *win = sfRenderWindow_create((sfVideoMode){1080, 720, 32}, "My Paint", sfDefaultStyle, NULL);
+    for (int i = 0; i < WIN_WIDTH && i < line_length; i++)
+        sfImage_setPixel(image, initial_pos.x + i, initial_pos.y, color);
+}
+
+static int loop(w_data_t *w_data)
+{
     sfEvent event;
 
-    menu = add_option_drop_menu(menu);
-    menu = add_option_drop_menu(menu);
-    menu = add_option_drop_menu(menu);
-    while (sfRenderWindow_isOpen(win)) {
-        sfRenderWindow_pollEvent(win, &event);
-        analyse_events(win, menu->button, event);
-        sfRenderWindow_display(win);
-        sfRenderWindow_clear(win, sfWhite);
-        sfRenderWindow_drawRectangleShape(win, menu->button->rect, NULL);
+    w_data->w_content->menu = add_option_drop_menu(w_data->w_content->menu);
+    draw_line(w_data->w_content->image, (sfVector2i){20, 50}, 250, sfBlue);
+    draw_line(w_data->w_content->image, (sfVector2i){20, 51}, 250, sfBlue);
+    draw_line(w_data->w_content->image, (sfVector2i){20, 52}, 250, sfBlue);
+    draw_line(w_data->w_content->image, (sfVector2i){20, 53}, 250, sfBlue);
+    draw_line(w_data->w_content->image, (sfVector2i){20, 54}, 250, sfBlue);
+    draw_line(w_data->w_content->image, (sfVector2i){20, 55}, 250, sfBlue);
+    sfTexture_updateFromImage(w_data->w_content->texture, w_data->w_content->image, 0, 0);
+    while (sfRenderWindow_isOpen(w_data->win)) {
+        sfRenderWindow_pollEvent(w_data->win, &event);
+        analyse_events(w_data->win,
+            w_data->w_content->menu->button, event);
+        sfRenderWindow_display(w_data->win);
+        sfRenderWindow_clear(w_data->win, sfWhite);
+        sfRenderWindow_drawRectangleShape(w_data->win,
+            w_data->w_content->menu->button->rect, NULL);
+        sfRenderWindow_drawSprite(w_data->win, w_data->w_content->sprite, sfFalse);
         //sfRenderWindow_drawRectangleShape(win, button->rect, NULL);
-        if (IS_HOVER(menu->button))
-            display_options(win, menu);
+        if (IS_HOVER(w_data->w_content->menu->button))
+            display_options(w_data->win, w_data->w_content->menu);
     }
-    return 0;
+    return SUCCESS;
 }
 
 int main(void)
 {
-    //struct s_gui_object *button = init_button((sfVector2f){0, 0}, (sfVector2f){100, 100});
-    struct s_gui_drop_menu *menu = create_drop_menu((sfVector2f){0, 0}, (sfVector2f){100, 100});
+    w_data_t *w_data = init_win();
 
-    loop(menu);
+    if (w_data == NULL)
+        return ERROR;
+    loop(w_data);
     return 0;
 }
