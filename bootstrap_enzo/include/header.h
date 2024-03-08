@@ -26,22 +26,22 @@ enum e_gui_state {
     RELEASED
 };
 
-struct s_gui_object {
+typedef struct button_content_s {
     sfRectangleShape *rect;
-    sfBool (*is_clicked)(struct s_gui_object*, sfMouseButtonEvent*);
-    sfBool (*is_hover)(struct s_gui_object*, sfMouseMoveEvent*);
+    sfBool (*is_clicked)(struct button_content_s*, sfMouseButtonEvent*);
+    sfBool (*is_hover)(struct button_content_s*, sfMouseMoveEvent*);
     enum e_gui_state state;
-};
+} b_content_t;
 
-struct s_gui_options {
-    struct s_gui_object *option;
-    struct s_gui_options *next;
-};
+typedef struct options_s {
+    b_content_t *option;
+    struct options_s *next;
+} options_t;
 
-struct s_gui_drop_menu {
-    struct s_gui_object* button;
-    struct s_gui_options* options;
-};
+typedef struct drop_menu_s {
+    b_content_t* button;
+    options_t* options;
+} drop_menu_t;
 
 /*typedef struct sprite_list_s {
     sfSprite *sprite;
@@ -49,8 +49,7 @@ struct s_gui_drop_menu {
 } sprite_list_t;*/
 
 typedef struct win_content_s {
-    struct s_gui_drop_menu *menu;
-    //sfColor **pixel_array;
+    drop_menu_t *menu;
     sfImage *image;
     sfSprite *sprite;
     sfTexture *texture;
@@ -66,13 +65,13 @@ typedef struct w_data_s {
 
 //-> init
 
-struct s_gui_object *init_button(sfVector2f position, sfVector2f size);
-struct s_gui_drop_menu *create_drop_menu(sfVector2f position, sfVector2f size);
-struct s_gui_drop_menu *add_option_drop_menu(struct s_gui_drop_menu *drop_menu);
+b_content_t *init_button(sfVector2f position, sfVector2f size);
+drop_menu_t *create_drop_menu(sfVector2f position, sfVector2f size);
+drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu);
 sfUint8 *init_pixel_array(void);
 w_data_t *init_win(void);
 
 //display
-int display_options(sfRenderWindow *win, struct s_gui_drop_menu *menu);
+int display_options(sfRenderWindow *win, drop_menu_t *menu);
 
 #endif

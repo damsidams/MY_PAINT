@@ -9,18 +9,18 @@
 #include <stdlib.h>
 #include "header.h"
 
-struct s_gui_drop_menu *create_drop_menu(sfVector2f position, sfVector2f size)
+drop_menu_t *create_drop_menu(sfVector2f position, sfVector2f size)
 {
-    struct s_gui_drop_menu *drop_menu = malloc(sizeof(struct s_gui_drop_menu));
+    drop_menu_t *drop_menu = malloc(sizeof(drop_menu_t));
 
     drop_menu->button = init_button(position, size);
     drop_menu->options = NULL;
     return drop_menu;
 }
 
-struct s_gui_drop_menu *add_option_drop_menu(struct s_gui_drop_menu *drop_menu)
+drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu)
 {
-    struct s_gui_options *op = malloc(sizeof(struct s_gui_options));
+    options_t *op = malloc(sizeof(options_t));
     sfRectangleShape *rect = drop_menu->button->rect;
     sfVector2f pos = sfRectangleShape_getPosition(rect);
     sfVector2f size = sfRectangleShape_getSize(rect);
@@ -35,9 +35,9 @@ struct s_gui_drop_menu *add_option_drop_menu(struct s_gui_drop_menu *drop_menu)
     return drop_menu;
 }
 
-int display_options(sfRenderWindow *win, struct s_gui_drop_menu *menu)
+int display_options(sfRenderWindow *win, drop_menu_t *menu)
 {
-    struct s_gui_options *option;
+    options_t *option;
 
     if (menu == NULL)
         return ERROR;

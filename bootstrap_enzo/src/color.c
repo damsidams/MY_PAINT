@@ -5,6 +5,7 @@
 ** Functions related to colors
 */
 
+#include <stdlib.h>
 #include "header.h"
 
 sfUint8 *init_pixel_array(void)

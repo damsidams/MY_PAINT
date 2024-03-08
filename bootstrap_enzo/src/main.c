@@ -10,7 +10,8 @@
 #include <stdlib.h>
 #include "header.h"
 
-static sfBool check_click(struct s_gui_object *button, sfMouseButtonEvent *event)
+static sfBool check_click(b_content_t *button,
+    sfMouseButtonEvent *event)
 {
     sfFloatRect tmp_rect = sfRectangleShape_getGlobalBounds(button->rect);
 
@@ -21,7 +22,7 @@ static sfBool check_click(struct s_gui_object *button, sfMouseButtonEvent *event
     return sfFalse;
 }
 
-static sfBool is_hover(struct s_gui_object *button, sfMouseMoveEvent *event)
+static sfBool is_hover(b_content_t *button, sfMouseMoveEvent *event)
 {
     sfFloatRect tmp_rect = sfRectangleShape_getGlobalBounds(button->rect);
 
@@ -32,10 +33,10 @@ static sfBool is_hover(struct s_gui_object *button, sfMouseMoveEvent *event)
     return sfFalse;
 }
 
-struct s_gui_object *init_button(sfVector2f position, sfVector2f size)
+b_content_t *init_button(sfVector2f position, sfVector2f size)
 {
     sfRectangleShape *rect = sfRectangleShape_create();
-    struct s_gui_object *button = malloc(sizeof(button));
+    b_content_t *button = malloc(sizeof(button));
 
     sfRectangleShape_setPosition(rect, position);
     sfRectangleShape_setSize(rect, size);
@@ -46,7 +47,8 @@ struct s_gui_object *init_button(sfVector2f position, sfVector2f size)
     return button;
 }
 
-static void analyse_events(sfRenderWindow *win, struct s_gui_object *button, sfEvent event)
+static void analyse_events(sfRenderWindow *win,
+    b_content_t *button, sfEvent event)
 {
     if (event.type == sfEvtClosed ||
         sfKeyboard_isKeyPressed(sfKeyEscape))
@@ -62,10 +64,10 @@ static void analyse_events(sfRenderWindow *win, struct s_gui_object *button, sfE
         if (button->is_clicked(button, &event.mouseButton))
             printf("Hello\n");
     }
-
 }
 
-static void draw_line(sfImage *image, sfVector2i initial_pos, int line_length, sfColor color)
+static void draw_line(sfImage *image, sfVector2i initial_pos,
+    int line_length, sfColor color)
 {
     for (int i = 0; i < WIN_WIDTH && i < line_length; i++)
         sfImage_setPixel(image, initial_pos.x + i, initial_pos.y, color);
@@ -76,13 +78,6 @@ static int loop(w_data_t *w_data)
     sfEvent event;
 
     w_data->w_content->menu = add_option_drop_menu(w_data->w_content->menu);
-    draw_line(w_data->w_content->image, (sfVector2i){20, 50}, 250, sfBlue);
-    draw_line(w_data->w_content->image, (sfVector2i){20, 51}, 250, sfBlue);
-    draw_line(w_data->w_content->image, (sfVector2i){20, 52}, 250, sfBlue);
-    draw_line(w_data->w_content->image, (sfVector2i){20, 53}, 250, sfBlue);
-    draw_line(w_data->w_content->image, (sfVector2i){20, 54}, 250, sfBlue);
-    draw_line(w_data->w_content->image, (sfVector2i){20, 55}, 250, sfBlue);
-    sfTexture_updateFromImage(w_data->w_content->texture, w_data->w_content->image, 0, 0);
     while (sfRenderWindow_isOpen(w_data->win)) {
         sfRenderWindow_pollEvent(w_data->win, &event);
         analyse_events(w_data->win,
@@ -91,8 +86,8 @@ static int loop(w_data_t *w_data)
         sfRenderWindow_clear(w_data->win, sfWhite);
         sfRenderWindow_drawRectangleShape(w_data->win,
             w_data->w_content->menu->button->rect, NULL);
-        sfRenderWindow_drawSprite(w_data->win, w_data->w_content->sprite, sfFalse);
-        //sfRenderWindow_drawRectangleShape(win, button->rect, NULL);
+        sfRenderWindow_drawSprite
+            (w_data->win, w_data->w_content->sprite, sfFalse);
         if (IS_HOVER(w_data->w_content->menu->button))
             display_options(w_data->win, w_data->w_content->menu);
     }
