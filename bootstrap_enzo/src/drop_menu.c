@@ -23,6 +23,8 @@ drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
     op->next = drop_menu->options;
     if (mode == Text)
         set_rect_text(op->option, op->option->rect, text, FONT_SIZE);
+    else if (mode == Image)
+        set_rect_img(op->option, text);
     sfRectangleShape_setFillColor(op->option->rect, sfWhite);
     drop_menu->options = op;
     button_nb++;
@@ -45,14 +47,53 @@ int display_options(sfRenderWindow *win, drop_menu_t *menu)
     return SUCCESS;
 }
 
-drop_menu_t *create_drop_menu(sfVector2f position, sfVector2f size)
+static drop_menu_t *init_file_dm(drop_menu_t *drop_menu, sfVector2f position,
+    sfVector2f size)
 {
-    drop_menu_t *drop_menu = malloc(sizeof(drop_menu_t));
-
     drop_menu->button = init_button(position, size);
     drop_menu->options = NULL;
+    set_rect_text(drop_menu->button, drop_menu->button->rect, "File", FONT_SIZE);
     add_option_drop_menu(drop_menu, "New file", Text);
     add_option_drop_menu(drop_menu, "Open file", Text);
     add_option_drop_menu(drop_menu, "Save file", Text);
+    return drop_menu;
+}
+
+static drop_menu_t *init_file_dm(drop_menu_t *drop_menu, sfVector2f position,
+    sfVector2f size)
+{
+    drop_menu->button = init_button(position, size);
+    drop_menu->options = NULL;
+    set_rect_text(drop_menu->button, drop_menu->button->rect, "Edit", FONT_SIZE);
+    add_option_drop_menu(drop_menu, PENCIL_PNG_PATH, Image);
+    add_option_drop_menu(drop_menu, ERASER_PNG_PATH, Image);
+    return drop_menu;
+}
+
+static drop_menu_t *init_help_dm(drop_menu_t *drop_menu, sfVector2f position,
+    sfVector2f size)
+{
+    drop_menu->button = init_button(position, size);
+    drop_menu->options = NULL;
+    set_rect_text(drop_menu->button, drop_menu->button->rect, "Edit", FONT_SIZE);
+    add_option_drop_menu(drop_menu, "About", Text);
+    add_option_drop_menu(drop_menu, "Help", Text);
+    return drop_menu;
+}
+
+drop_menu_t *create_drop_menu(sfVector2f position, sfVector2f size)
+{
+    drop_menu_t **drop_menu = malloc(sizeof(drop_menu_t) * (DROP_MENU_NB + 1));
+    drop_menu_t *file_dm = malloc(sizeof(drop_menu_t));
+    drop_menu_t *edit_dm = malloc(sizeof(drop_menu_t));
+    drop_menu_t *help_dm = malloc(sizeof(drop_menu_t));
+
+    drop_menu[0] = init_file_dm(file_dm, (sfVector2f)
+        {position.x + size.x * 0, position.y}, size);
+    drop_menu[1] = init_edit_dm(edit_dm, (sfVector2f)
+        {position.x + size.x * 1, position.y}, size);
+    drop_menu[2] = init_help_dm(help_dm, (sfVector2f)
+        {position.x + size.x * 2, position.y}, size);
+    drop_menu[3] = NULL;
     return drop_menu;
 }

@@ -21,6 +21,9 @@
     #define BITS_PER_PIXEL 32
     #define FONT_SIZE 16
     #define FONTPATH "src/assets/font.ttf"
+    #define PENCIL_PNG_PATH "src/assets/sprites/paint-brush.png"
+    #define ERASER_PNG_PATH "src/assets/sprites/eraser.png"
+    #define DROP_MENU_NB 3
 
 enum e_gui_state {
     NONE = 0,
@@ -59,7 +62,7 @@ typedef struct drop_menu_s {
 } sprite_list_t;*/
 
 typedef struct win_content_s {
-    drop_menu_t *menu;
+    drop_menu_t *menu[DROP_MENU_NB];
     sfImage *image;
     sfSprite *sprite;
     sfTexture *texture;
@@ -81,9 +84,10 @@ drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
 sfUint8 *init_pixel_array(void);
 w_data_t *init_win(void);
 
-// --> text
+// --> button
 sfBool set_rect_text(b_content_t *button, sfRectangleShape *rect,
     char const *text, unsigned int font_size);
+sfBool set_rect_img(b_content_t *button, char const *img_path);
 
 // --> display
 int display_options(sfRenderWindow *win, drop_menu_t *menu);

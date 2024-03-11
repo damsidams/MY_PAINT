@@ -32,3 +32,12 @@ sfBool set_rect_text(b_content_t *button, sfRectangleShape *rect,
         / 2 - txt_bounds.height / 2});
     return sfTrue;
 }
+
+sfBool set_rect_img(b_content_t *button, char const *img_path)
+{
+    sfTexture *texture = sfTexture_createFromFile(img_path, NULL);
+
+    sfSprite_setTexture(button->sprite, texture, sfFalse);
+    sfRectangleShape_setTexture(button->rect, texture, NULL);
+    sfTexture_destroy(texture);
+}
