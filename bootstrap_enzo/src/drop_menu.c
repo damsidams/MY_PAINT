@@ -85,7 +85,7 @@ static drop_menu_t *init_help_dm(drop_menu_t *drop_menu, sfVector2f position,
 {
     drop_menu->button = init_button(position, size);
     drop_menu->options = NULL;
-    set_rect_text(drop_menu->button, drop_menu->button->rect, "Edit", FONT_SIZE);
+    set_rect_text(drop_menu->button, drop_menu->button->rect, "Help", FONT_SIZE);
     add_option_drop_menu(drop_menu, "About", Text);
     add_option_drop_menu(drop_menu, "Help", Text);
     return drop_menu;

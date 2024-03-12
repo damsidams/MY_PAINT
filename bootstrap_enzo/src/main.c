@@ -52,8 +52,7 @@ static int loop(w_data_t *w_data)
             w_data->w_content, &event);
         sfRenderWindow_display(w_data->win);
         sfRenderWindow_clear(w_data->win, sfWhite);
-        /*sfRenderWindow_drawRectangleShape(w_data->win,
-          w_data->w_content->menu->button->rect, NULL);*/
+        display_top_bar(w_data->win, w_data->w_content->menu);
         sfRenderWindow_drawSprite
             (w_data->win, w_data->w_content->sprite, sfFalse);
     }
