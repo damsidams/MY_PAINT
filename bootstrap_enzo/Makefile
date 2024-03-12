@@ -15,6 +15,7 @@ SRC     =	src/main.c	\
 		src/color.c	\
 		src/edit.c	\
 		src/display.c	\
+		src/event.c	\
 
 CRFLAGS	=	--coverage -lcriterion
 
