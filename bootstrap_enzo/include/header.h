@@ -62,7 +62,7 @@ typedef struct drop_menu_s {
 } sprite_list_t;*/
 
 typedef struct win_content_s {
-    drop_menu_t *menu[DROP_MENU_NB];
+    drop_menu_t **menu;
     sfImage *image;
     sfSprite *sprite;
     sfTexture *texture;
@@ -78,7 +78,7 @@ typedef struct w_data_s {
 
 //-> init
 b_content_t *init_button(sfVector2f position, sfVector2f size);
-drop_menu_t *create_drop_menu(sfVector2f position, sfVector2f size);
+drop_menu_t **create_drop_menu(sfVector2f position, sfVector2f size);
 drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
     enum init_mode);
 sfUint8 *init_pixel_array(void);
@@ -90,6 +90,6 @@ sfBool set_rect_text(b_content_t *button, sfRectangleShape *rect,
 sfBool set_rect_img(b_content_t *button, char const *img_path);
 
 // --> display
-int display_options(sfRenderWindow *win, drop_menu_t *menu);
+int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu);
 
 #endif

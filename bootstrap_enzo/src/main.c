@@ -10,23 +10,24 @@
 #include <stdlib.h>
 #include "header.h"
 
-static void analyse_events(sfRenderWindow *win,
-    b_content_t *button, sfEvent event)
+static void analyse_top_bar_event(drop_menu_t **menu, sfEvent *event)
 {
-    if (event.type == sfEvtClosed ||
+    for (unsigned int i = 0; menu[i] != NULL; i++) {
+        if (event->type == sfEvtMouseMoved)
+            (*(menu[i])->button->is_hover)((menu[i]->button), &event->mouseMove);
+        if (event->type == sfEvtMouseButtonPressed)
+            (*(menu[i])->button->is_clicked)((menu[i]->button), &event->mouseButton);
+    }
+}
+
+static void analyse_events(sfRenderWindow *win,
+    win_content_t *wc, sfEvent *event)
+{
+    if (event->type == sfEvtClosed ||
         sfKeyboard_isKeyPressed(sfKeyEscape))
         sfRenderWindow_close(win);
-    button->state = RELEASED;
-    if (event.type == sfEvtMouseMoved) {
-        if ((*button->is_hover)(button, &event.mouseMove))
-            sfRectangleShape_setFillColor(button->rect, sfGreen);
-        else
-            sfRectangleShape_setFillColor(button->rect, sfBlack);
-    }
-    if (event.type == sfEvtMouseButtonPressed) {
-        if ((*button->is_clicked)(button, &event.mouseButton))
-            printf("Hello\n");
-    }
+    analyse_top_bar_event(wc->menu, event);
+    run_top_bar_event(win, wc->menu);
 }
 
 static void draw_line(sfImage *image, sfVector2i initial_pos,
@@ -40,23 +41,21 @@ static int loop(w_data_t *w_data)
 {
     sfEvent event;
 
-    draw_line(w_data->w_content->image, (sfVector2i){105, 50}, 150, sfRed);
+    /*draw_line(w_data->w_content->image, (sfVector2i){105, 50}, 150, sfRed);
     draw_line(w_data->w_content->image, (sfVector2i){105, 51}, 150, sfRed);
     draw_line(w_data->w_content->image, (sfVector2i){105, 52}, 150, sfRed);
-    draw_line(w_data->w_content->image, (sfVector2i){105, 53}, 150, sfRed);
+    draw_line(w_data->w_content->image, (sfVector2i){105, 53}, 150, sfRed);*/
     sfTexture_updateFromImage(w_data->w_content->texture, w_data->w_content->image, 0, 0);
     while (sfRenderWindow_isOpen(w_data->win)) {
         sfRenderWindow_pollEvent(w_data->win, &event);
         analyse_events(w_data->win,
-            w_data->w_content->menu->button, event);
+            w_data->w_content, &event);
         sfRenderWindow_display(w_data->win);
         sfRenderWindow_clear(w_data->win, sfWhite);
-        sfRenderWindow_drawRectangleShape(w_data->win,
-            w_data->w_content->menu->button->rect, NULL);
+        /*sfRenderWindow_drawRectangleShape(w_data->win,
+          w_data->w_content->menu->button->rect, NULL);*/
         sfRenderWindow_drawSprite
             (w_data->win, w_data->w_content->sprite, sfFalse);
-        if (IS_HOVER(w_data->w_content->menu->button))
-            display_options(w_data->win, w_data->w_content->menu);
     }
     return SUCCESS;
 }

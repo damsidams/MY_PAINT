@@ -9,6 +9,32 @@
 #include <stdlib.h>
 #include "header.h"
 
+
+static int display_options(sfRenderWindow *win, drop_menu_t *menu)
+{
+    options_t *option_list;
+
+    if (menu == NULL)
+        return ERROR;
+    option_list = menu->options;
+    while (option_list != NULL) {
+        sfRenderWindow_drawRectangleShape(win, option_list->option->rect, NULL);
+        if (option_list->option->txt != NULL)
+            sfRenderWindow_drawText(win, option_list->option->txt, NULL);
+        option_list = option_list->next;
+    }
+    return SUCCESS;
+}
+
+int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu)
+{
+    for (unsigned int i = 0; menu[i] != NULL; i++) {
+        if (IS_HOVER(menu[i]->button))
+            display_options(win, menu[i]);
+    }
+    return SUCCESS;
+}
+
 drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
     enum init_mode mode)
 {
@@ -31,22 +57,6 @@ drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
     return drop_menu;
 }
 
-int display_options(sfRenderWindow *win, drop_menu_t *menu)
-{
-    options_t *option_list;
-
-    if (menu == NULL)
-        return ERROR;
-    option_list = menu->options;
-    while (option_list != NULL) {
-        sfRenderWindow_drawRectangleShape(win, option_list->option->rect, NULL);
-        if (option_list->option->txt != NULL)
-            sfRenderWindow_drawText(win, option_list->option->txt, NULL);
-        option_list = option_list->next;
-    }
-    return SUCCESS;
-}
-
 static drop_menu_t *init_file_dm(drop_menu_t *drop_menu, sfVector2f position,
     sfVector2f size)
 {
@@ -59,7 +69,7 @@ static drop_menu_t *init_file_dm(drop_menu_t *drop_menu, sfVector2f position,
     return drop_menu;
 }
 
-static drop_menu_t *init_file_dm(drop_menu_t *drop_menu, sfVector2f position,
+static drop_menu_t *init_edit_dm(drop_menu_t *drop_menu, sfVector2f position,
     sfVector2f size)
 {
     drop_menu->button = init_button(position, size);
@@ -81,7 +91,7 @@ static drop_menu_t *init_help_dm(drop_menu_t *drop_menu, sfVector2f position,
     return drop_menu;
 }
 
-drop_menu_t *create_drop_menu(sfVector2f position, sfVector2f size)
+drop_menu_t **create_drop_menu(sfVector2f position, sfVector2f size)
 {
     drop_menu_t **drop_menu = malloc(sizeof(drop_menu_t) * (DROP_MENU_NB + 1));
     drop_menu_t *file_dm = malloc(sizeof(drop_menu_t));
