@@ -25,7 +25,7 @@
     #define FONTPATH "src/assets/font.ttf"
     #define PENCIL_PNG_PATH "src/assets/sprites/paint-brush.png"
     #define ERASER_PNG_PATH "src/assets/sprites/eraser.png"
-    #define TOOL_BAR_POURCENTAGE 0.3
+    #define TOOL_BAR_POURCENTAGE 0.2
     #define DROP_MENU_NB 3
     #define TOP_BAR_HEIGHT 50
     #define TOP_BAR_WIDTH 100

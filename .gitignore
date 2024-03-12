@@ -3,7 +3,7 @@
 *.~
 coding-style-reports.log
 a.out
-my_paintx
+my_paint
 unit_tests*
 src/*.gc*
 *.gcna
