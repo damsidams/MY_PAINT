@@ -34,6 +34,7 @@
     #define TOOL_SELECTOR_X WIN_WIDTH * 0.2
     #define TOOL_BAR_POURCENTAGE 0.2
     #define TOOL_SELECT_OT 2.3
+    #define TOOL_MARGIN 25
     #define TOOL_SELECTOR_SIZE 70
 
 enum e_gui_state {
