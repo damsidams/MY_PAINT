@@ -13,6 +13,8 @@
 
     #define WIN_HEIGHT 1080
     #define WIN_WIDTH 1920
+    #define DRAW_WIDTH 1280
+    #define DRAW_HEIGHT 720
     #define IS_PRESSED(button) (button->state == PRESSED)
     #define IS_HOVER(button) (button->state == HOVER)
     #define IS_RELEASED(button) (button->state == RELEASED)
@@ -97,5 +99,8 @@ int display_top_bar(sfRenderWindow *win, drop_menu_t **drop_menu);
 // --> events
 void analyse_events(sfRenderWindow *win,
     win_content_t *wc, sfEvent *event);
+
+// --> draw
+void draw_zone(sfImage *image);
 
 #endif

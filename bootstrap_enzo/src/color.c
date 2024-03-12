@@ -10,5 +10,5 @@
 
 sfUint8 *init_pixel_array(void)
 {
-    return malloc((sizeof(sfUint8) * 4) * (WIN_WIDTH * WIN_HEIGHT + 1));
+    return malloc((sizeof(sfUint8) * 4) * (DRAW_WIDTH * DRAW_HEIGHT + 1));
 }

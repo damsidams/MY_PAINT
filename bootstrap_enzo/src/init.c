@@ -53,16 +53,19 @@ static win_content_t *init_win_content(void)
 {
     win_content_t *wc = malloc(sizeof(win_content_t));
     sfUint8 *buffer = init_pixel_array();
-    sfIntRect image_rect = {0, 0, WIN_WIDTH, WIN_HEIGHT};
+    sfIntRect image_rect = {0, 0, DRAW_WIDTH, DRAW_HEIGHT};
+    sfVector2f start = {(WIN_WIDTH / 2) - (DRAW_WIDTH / 2),
+        (WIN_HEIGHT / 2) - (DRAW_HEIGHT / 2)};
 
     if (buffer == NULL || wc == NULL)
         return NULL;
     wc->menu = create_drop_menu((sfVector2f){0, 0}, (sfVector2f){100, 50});
-    wc->image = sfImage_createFromPixels(WIN_WIDTH, WIN_HEIGHT, buffer);
+    wc->image = sfImage_createFromPixels(DRAW_WIDTH, DRAW_HEIGHT, buffer);
     wc->sprite = sfSprite_create();
     wc->texture = sfTexture_createFromImage(wc->image, &image_rect);
     sfSprite_setTexture(wc->sprite, wc->texture, sfTrue);
     sfSprite_setTextureRect(wc->sprite, image_rect);
+    sfSprite_setPosition(wc->sprite, start);
     return wc;
 }
 

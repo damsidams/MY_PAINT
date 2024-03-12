@@ -21,10 +21,7 @@ static int loop(w_data_t *w_data)
 {
     sfEvent event;
 
-    /*draw_line(w_data->w_content->image, (sfVector2i){105, 50}, 150, sfRed);
-    draw_line(w_data->w_content->image, (sfVector2i){105, 51}, 150, sfRed);
-    draw_line(w_data->w_content->image, (sfVector2i){105, 52}, 150, sfRed);
-    draw_line(w_data->w_content->image, (sfVector2i){105, 53}, 150, sfRed);*/
+    draw_zone(w_data->w_content->image);
     sfTexture_updateFromImage(w_data->w_content->texture, w_data->w_content->image, 0, 0);
     while (sfRenderWindow_isOpen(w_data->win)) {
         sfRenderWindow_pollEvent(w_data->win, &event);
