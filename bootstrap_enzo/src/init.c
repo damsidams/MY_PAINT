@@ -59,12 +59,13 @@ static win_content_t *init_win_content(void)
 
     if (buffer == NULL || wc == NULL)
         return NULL;
-    wc->menu = create_drop_menu((sfVector2f){0, 0}, (sfVector2f){100, 50});
+    wc->menu = create_drop_menu((sfVector2f){0, 0}, (sfVector2f){TOP_BAR_WIDTH, TOP_BAR_HEIGHT});
     wc->image = sfImage_createFromPixels(WIN_WIDTH, WIN_HEIGHT, buffer);
     wc->sprite = sfSprite_create();
     wc->texture = sfTexture_createFromImage(wc->image, &image_rect);
     sfSprite_setTexture(wc->sprite, wc->texture, sfTrue);
     sfSprite_setTextureRect(wc->sprite, image_rect);
+    wc->toolbar = init_toolbar();
     return wc;
 }
 

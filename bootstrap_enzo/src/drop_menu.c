@@ -18,7 +18,6 @@ static int display_options(sfRenderWindow *win, drop_menu_t *menu)
         return ERROR;
     option_list = menu->options;
     while (option_list != NULL) {
-        sfRenderWindow_drawRectangleShape(win, option_list->option->rect, NULL);
         if (option_list->option->txt != NULL)
             sfRenderWindow_drawText(win, option_list->option->txt, NULL);
         option_list = option_list->next;
@@ -29,6 +28,7 @@ static int display_options(sfRenderWindow *win, drop_menu_t *menu)
 int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu)
 {
     for (unsigned int i = 0; menu[i] != NULL; i++) {
+        sfRenderWindow_drawRectangleShape(win, menu[i]->button->rect, sfFalse);
         if (IS_HOVER(menu[i]->button) || IS_PRESSED(menu[i]->button))
             display_options(win, menu[i]);
     }
