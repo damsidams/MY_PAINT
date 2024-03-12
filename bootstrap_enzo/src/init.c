@@ -29,6 +29,8 @@ sfBool is_hover(b_content_t *button, sfMouseMoveEvent *event)
         button->state = HOVER;
         return sfTrue;
     }
+    if (button->state == HOVER)
+        button->state = NONE;
     return sfFalse;
 }
 

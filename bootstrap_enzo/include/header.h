@@ -93,4 +93,8 @@ sfBool set_rect_img(b_content_t *button, char const *img_path);
 int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu);
 int display_top_bar(sfRenderWindow *win, drop_menu_t **drop_menu);
 
+// --> events
+void analyse_events(sfRenderWindow *win,
+    win_content_t *wc, sfEvent *event);
+
 #endif
