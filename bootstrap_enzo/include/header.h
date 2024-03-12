@@ -25,7 +25,10 @@
     #define FONTPATH "src/assets/font.ttf"
     #define PENCIL_PNG_PATH "src/assets/sprites/paint-brush.png"
     #define ERASER_PNG_PATH "src/assets/sprites/eraser.png"
+    #define TOOL_BAR_POURCENTAGE 0.3
     #define DROP_MENU_NB 3
+    #define TOP_BAR_HEIGHT 50
+    #define TOP_BAR_WIDTH 100
 
 enum e_gui_state {
     NONE = 0,
@@ -42,7 +45,7 @@ enum init_mode {
 typedef struct button_content_s {
     sfRectangleShape *rect;
     sfText *txt;
-    sfSprite *sprite;
+    sfTexture *texture;
     sfBool (*is_clicked)(struct button_content_s*, sfMouseButtonEvent*);
     sfBool (*is_hover)(struct button_content_s*, sfMouseMoveEvent*);
     enum e_gui_state state;
@@ -64,11 +67,18 @@ typedef struct drop_menu_s {
     sfSprite *next;
 } sprite_list_t;*/
 
+typedef struct toolbar_s {
+    sfSprite *sprite;
+    sfImage *image;
+    sfTexture *texture;
+} toolbar_t;
+
 typedef struct win_content_s {
     drop_menu_t **menu;
     sfImage *image;
     sfSprite *sprite;
     sfTexture *texture;
+    toolbar_t *toolbar;
 } win_content_t;
 
 typedef struct w_data_s {
@@ -86,6 +96,7 @@ drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
     enum init_mode, int rank_nb);
 sfUint8 *init_pixel_array(void);
 w_data_t *init_win(void);
+toolbar_t *init_toolbar(void);
 
 // --> button
 sfBool set_rect_text(b_content_t *button, sfRectangleShape *rect,
@@ -95,6 +106,7 @@ sfBool set_rect_img(b_content_t *button, char const *img_path);
 // --> display
 int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu);
 int display_top_bar(sfRenderWindow *win, drop_menu_t **drop_menu);
+int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar);
 
 // --> events
 void analyse_events(sfRenderWindow *win,

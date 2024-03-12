@@ -28,8 +28,10 @@ static int loop(w_data_t *w_data)
         analyse_events(w_data->win,
             w_data->w_content, &event);
         sfRenderWindow_display(w_data->win);
+        //sfRenderWindow_clear(w_data->win, sfColor_fromRGB(199, 171, 169));
         sfRenderWindow_clear(w_data->win, sfWhite);
         display_top_bar(w_data->win, w_data->w_content->menu);
+        display_tool_bar(w_data->win, w_data->w_content->toolbar);
         sfRenderWindow_drawSprite
             (w_data->win, w_data->w_content->sprite, sfFalse);
     }
