@@ -24,6 +24,15 @@ static void change_image_color(sfImage *image)
     }
 }
 
+static sfVector2f get_toolselector_pos(void)
+{
+    float x = (float)TOOL_SELECTOR_X;
+    float y = (float)(TOP_BAR_HEIGHT +
+        TOOL_BAR_POURCENTAGE * WIN_HEIGHT / 2 - TOOL_SELECTOR_SIZE / 2);
+
+    return (sfVector2f){x, y};
+}
+
 toolbar_t *init_toolbar(void)
 {
     toolbar_t *toolbar = malloc(sizeof(toolbar_t));
@@ -36,6 +45,11 @@ toolbar_t *init_toolbar(void)
         (WIN_WIDTH, WIN_HEIGHT * TOOL_BAR_POURCENTAGE, pixel_array);
     change_image_color(toolbar->image);
     toolbar->texture = sfTexture_createFromImage(toolbar->image, NULL);
+    toolbar->button = init_button(get_toolselector_pos(),
+        (sfVector2f){TOOL_SELECTOR_SIZE, TOOL_SELECTOR_SIZE});
+    set_rect_img(toolbar->button, PENCIL_PNG_PATH);
+    sfRectangleShape_setOutlineColor(toolbar->button->rect, sfBlack);
+    sfRectangleShape_setOutlineThickness(toolbar->button->rect, TOOL_SELECT_OT);
     sfSprite_setTexture(toolbar->sprite, toolbar->texture, sfFalse);
     sfSprite_setPosition(toolbar->sprite, (sfVector2f){0, TOP_BAR_HEIGHT});
     return toolbar;

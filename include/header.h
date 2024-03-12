@@ -25,10 +25,16 @@
     #define FONTPATH "src/assets/font.ttf"
     #define PENCIL_PNG_PATH "src/assets/sprites/paint-brush.png"
     #define ERASER_PNG_PATH "src/assets/sprites/eraser.png"
-    #define TOOL_BAR_POURCENTAGE 0.2
     #define DROP_MENU_NB 3
     #define TOP_BAR_HEIGHT 50
     #define TOP_BAR_WIDTH 100
+
+/* tool bar */
+
+    #define TOOL_SELECTOR_X WIN_WIDTH * 0.2
+    #define TOOL_BAR_POURCENTAGE 0.2
+    #define TOOL_SELECT_OT 2.3
+    #define TOOL_SELECTOR_SIZE 70
 
 enum e_gui_state {
     NONE = 0,
@@ -66,6 +72,7 @@ typedef struct toolbar_s {
     sfSprite *sprite;
     sfImage *image;
     sfTexture *texture;
+    b_content_t *button;
 } toolbar_t;
 
 typedef struct win_content_s {
