@@ -35,15 +35,11 @@ sfBool set_rect_text(b_content_t *button, sfRectangleShape *rect,
 
 sfBool set_rect_img(b_content_t *button, char const *img_path)
 {
-    sfTexture *texture = sfTexture_createFromFile(img_path, NULL);
-
-    if (texture == NULL) {
+    button->texture = sfTexture_createFromFile(img_path, NULL);
+    if (button->texture == NULL) {
         my_putstr_err("Error: texture not found\n");
         return sfFalse;
     }
-    button->sprite = sfSprite_create();
-    sfSprite_setTexture(button->sprite, texture, sfTrue);
-    sfRectangleShape_setTexture(button->rect, texture, sfFalse);
-    sfTexture_destroy(texture);
+    sfRectangleShape_setTexture(button->rect, button->texture, sfFalse);
     return sfTrue;
 }

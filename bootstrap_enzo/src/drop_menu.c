@@ -29,7 +29,7 @@ static int display_options(sfRenderWindow *win, drop_menu_t *menu)
 int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu)
 {
     for (unsigned int i = 0; menu[i] != NULL; i++) {
-        if (IS_HOVER(menu[i]->button))
+        if (IS_HOVER(menu[i]->button) || IS_PRESSED(menu[i]->button))
             display_options(win, menu[i]);
     }
     return SUCCESS;

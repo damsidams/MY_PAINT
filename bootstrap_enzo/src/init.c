@@ -18,6 +18,8 @@ sfBool check_click(b_content_t *button,
         button->state = PRESSED;
         return sfTrue;
     }
+    if (button->state == PRESSED)
+        button->state = RELEASED;
     return sfFalse;
 }
 
@@ -25,7 +27,7 @@ sfBool is_hover(b_content_t *button, sfMouseMoveEvent *event)
 {
     sfFloatRect tmp_rect = sfRectangleShape_getGlobalBounds(button->rect);
 
-    if (sfFloatRect_contains(&tmp_rect, event->x, event->y)) {
+    if (sfFloatRect_contains(&tmp_rect, event->x, event->y) && button->state != PRESSED) {
         button->state = HOVER;
         return sfTrue;
     }
@@ -41,7 +43,7 @@ b_content_t *init_button(sfVector2f position, sfVector2f size)
 
     sfRectangleShape_setPosition(rect, position);
     sfRectangleShape_setSize(rect, size);
-    sfRectangleShape_setFillColor(rect, sfBlue);
+    sfRectangleShape_setFillColor(rect, sfWhite);
     button->rect = rect;
     button->is_clicked = &check_click;
     button->is_hover = &is_hover;

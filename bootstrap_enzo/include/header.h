@@ -40,7 +40,7 @@ enum init_mode {
 typedef struct button_content_s {
     sfRectangleShape *rect;
     sfText *txt;
-    sfSprite *sprite;
+    sfTexture *texture;
     sfBool (*is_clicked)(struct button_content_s*, sfMouseButtonEvent*);
     sfBool (*is_hover)(struct button_content_s*, sfMouseMoveEvent*);
     enum e_gui_state state;
