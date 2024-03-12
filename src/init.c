@@ -48,6 +48,8 @@ b_content_t *init_button(sfVector2f position, sfVector2f size)
     button->is_clicked = &check_click;
     button->is_hover = &is_hover;
     button->txt = NULL;
+    button->texture = NULL;
+    button->state = NONE;
     return button;
 }
 
