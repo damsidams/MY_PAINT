@@ -44,6 +44,7 @@ typedef struct button_content_s {
     sfBool (*is_clicked)(struct button_content_s*, sfMouseButtonEvent*);
     sfBool (*is_hover)(struct button_content_s*, sfMouseMoveEvent*);
     enum e_gui_state state;
+    int rank;
 } b_content_t;
 
 typedef struct options_s {
@@ -80,7 +81,7 @@ typedef struct w_data_s {
 b_content_t *init_button(sfVector2f position, sfVector2f size);
 drop_menu_t **create_drop_menu(sfVector2f position, sfVector2f size);
 drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
-    enum init_mode);
+    enum init_mode, int rank_nb);
 sfUint8 *init_pixel_array(void);
 w_data_t *init_win(void);
 
