@@ -9,7 +9,6 @@
 #include <stdlib.h>
 #include "header.h"
 
-
 static int display_options(sfRenderWindow *win, drop_menu_t *menu)
 {
     options_t *option_list;
@@ -20,6 +19,9 @@ static int display_options(sfRenderWindow *win, drop_menu_t *menu)
     while (option_list != NULL) {
         if (option_list->option->txt != NULL)
             sfRenderWindow_drawText(win, option_list->option->txt, NULL);
+        if (option_list->option->texture != NULL)
+            sfRenderWindow_drawRectangleShape
+                (win, option_list->option->rect, NULL);
         option_list = option_list->next;
     }
     return SUCCESS;
@@ -28,7 +30,6 @@ static int display_options(sfRenderWindow *win, drop_menu_t *menu)
 int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu)
 {
     for (unsigned int i = 0; menu[i] != NULL; i++) {
-        sfRenderWindow_drawRectangleShape(win, menu[i]->button->rect, sfFalse);
         if (IS_HOVER(menu[i]->button) || IS_PRESSED(menu[i]->button))
             display_options(win, menu[i]);
     }
@@ -42,8 +43,8 @@ drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
     sfRectangleShape *rect = drop_menu->button->rect;
     sfVector2f pos = sfRectangleShape_getPosition(rect);
     sfVector2f size = sfRectangleShape_getSize(rect);
-    drop_menu->button->rank = rank_nb;
 
+    drop_menu->button->rank = rank_nb;
     pos.y += size.y * rank_nb;
     op->option = init_button(pos, size);
     op->next = drop_menu->options;
@@ -61,7 +62,8 @@ static drop_menu_t *init_file_dm(drop_menu_t *drop_menu, sfVector2f position,
 {
     drop_menu->button = init_button(position, size);
     drop_menu->options = NULL;
-    set_rect_text(drop_menu->button, drop_menu->button->rect, "File", FONT_SIZE);
+    set_rect_text(drop_menu->button,
+        drop_menu->button->rect, "File", FONT_SIZE);
     add_option_drop_menu(drop_menu, "New file", Text, 1);
     add_option_drop_menu(drop_menu, "Open file", Text, 2);
     add_option_drop_menu(drop_menu, "Save file", Text, 3);
@@ -73,7 +75,8 @@ static drop_menu_t *init_edit_dm(drop_menu_t *drop_menu, sfVector2f position,
 {
     drop_menu->button = init_button(position, size);
     drop_menu->options = NULL;
-    set_rect_text(drop_menu->button, drop_menu->button->rect, "Edit", FONT_SIZE);
+    set_rect_text
+        (drop_menu->button, drop_menu->button->rect, "Edit", FONT_SIZE);
     add_option_drop_menu(drop_menu, PENCIL_PNG_PATH, Image, 1);
     add_option_drop_menu(drop_menu, ERASER_PNG_PATH, Image, 2);
     return drop_menu;
@@ -84,7 +87,8 @@ static drop_menu_t *init_help_dm(drop_menu_t *drop_menu, sfVector2f position,
 {
     drop_menu->button = init_button(position, size);
     drop_menu->options = NULL;
-    set_rect_text(drop_menu->button, drop_menu->button->rect, "Help", FONT_SIZE);
+    set_rect_text
+        (drop_menu->button, drop_menu->button->rect, "Help", FONT_SIZE);
     add_option_drop_menu(drop_menu, "About", Text, 1);
     add_option_drop_menu(drop_menu, "Help", Text, 2);
     return drop_menu;

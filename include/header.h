@@ -46,8 +46,8 @@ typedef struct button_content_s {
     sfRectangleShape *rect;
     sfText *txt;
     sfTexture *texture;
-    sfBool (*is_clicked)(struct button_content_s*, sfMouseButtonEvent*);
-    sfBool (*is_hover)(struct button_content_s*, sfMouseMoveEvent*);
+    sfBool (*is_clicked)(struct button_content_s *, sfMouseButtonEvent *);
+    sfBool (*is_hover)(struct button_content_s *, sfMouseMoveEvent *);
     enum e_gui_state state;
     int rank;
 } b_content_t;
@@ -58,14 +58,9 @@ typedef struct options_s {
 } options_t;
 
 typedef struct drop_menu_s {
-    b_content_t* button;
-    options_t* options;
+    b_content_t *button;
+    options_t *options;
 } drop_menu_t;
-
-/*typedef struct sprite_list_s {
-    sfSprite *sprite;
-    sfSprite *next;
-} sprite_list_t;*/
 
 typedef struct toolbar_s {
     sfSprite *sprite;

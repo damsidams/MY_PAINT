@@ -12,9 +12,11 @@ static void analyse_top_bar_event(drop_menu_t **menu, sfEvent *event)
 {
     for (unsigned int i = 0; menu[i] != NULL; i++) {
         if (event->type == sfEvtMouseMoved)
-            (*(menu[i])->button->is_hover)((menu[i]->button), &event->mouseMove);
+            (*(menu[i])->button->is_hover)
+                ((menu[i]->button), &event->mouseMove);
         if (event->type == sfEvtMouseButtonPressed)
-            (*(menu[i])->button->is_clicked)((menu[i]->button), &event->mouseButton);
+            (*(menu[i])->button->is_clicked)
+                ((menu[i]->button), &event->mouseButton);
     }
 }
 

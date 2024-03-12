@@ -35,7 +35,7 @@ toolbar_t *init_toolbar(void)
     toolbar->image = sfImage_createFromPixels
         (WIN_WIDTH, WIN_HEIGHT * TOOL_BAR_POURCENTAGE, pixel_array);
     change_image_color(toolbar->image);
-    toolbar->texture = sfTexture_createSrgbFromImage(toolbar->image, NULL);
+    toolbar->texture = sfTexture_createFromImage(toolbar->image, NULL);
     sfSprite_setTexture(toolbar->sprite, toolbar->texture, sfFalse);
     sfSprite_setPosition(toolbar->sprite, (sfVector2f){0, TOP_BAR_HEIGHT});
     return toolbar;
