@@ -53,6 +53,15 @@ b_content_t *init_button(sfVector2f position, sfVector2f size)
     return button;
 }
 
+static void init_draw(win_content_t *wc)
+{
+    draw_param_t *draw = malloc(sizeof(draw_param_t));
+
+    draw->size = DEFAULT_DRAW_SIZE;
+    draw->color = DEFAULT_DRAW_COLOR;
+    wc->draw = draw;
+}
+
 static win_content_t *init_win_content(void)
 {
     win_content_t *wc = malloc(sizeof(win_content_t));
@@ -72,6 +81,7 @@ static win_content_t *init_win_content(void)
     sfSprite_setTextureRect(wc->sprite, image_rect);
     sfSprite_setPosition(wc->sprite, start);
     wc->toolbar = init_toolbar();
+    init_draw(wc);
     return wc;
 }
 

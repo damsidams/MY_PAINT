@@ -25,6 +25,9 @@
     #define FONTPATH "src/assets/font.ttf"
     #define PENCIL_PNG_PATH "src/assets/sprites/paint-brush.png"
     #define ERASER_PNG_PATH "src/assets/sprites/eraser.png"
+
+/* top nav bar */
+
     #define DROP_MENU_NB 3
     #define TOP_BAR_HEIGHT 50
     #define TOP_BAR_WIDTH 100
@@ -36,6 +39,11 @@
     #define TOOL_SELECT_OT 2.3
     #define TOOL_MARGIN 25
     #define TOOL_SELECTOR_SIZE 70
+
+/* draw info */
+
+    #define DEFAULT_DRAW_SIZE 2
+    #define DEFAULT_DRAW_COLOR sfBlack
 
 enum e_gui_state {
     NONE = 0,
@@ -76,12 +84,18 @@ typedef struct toolbar_s {
     options_t *tool_list;
 } toolbar_t;
 
+typedef struct draw_param_s {
+    int size;
+    sfColor color;
+} draw_param_t;
+
 typedef struct win_content_s {
     drop_menu_t **menu;
     sfImage *image;
     sfSprite *sprite;
     sfTexture *texture;
     toolbar_t *toolbar;
+    draw_param_t *draw;
 } win_content_t;
 
 typedef struct w_data_s {

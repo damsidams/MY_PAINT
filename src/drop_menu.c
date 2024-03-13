@@ -46,7 +46,7 @@ drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
 
     drop_menu->button->rank = rank_nb;
     pos.y += size.y * rank_nb;
-    op->button= init_button(pos, size);
+    op->button = init_button(pos, size);
     op->next = drop_menu->options;
     if (mode == Text)
         set_rect_text(op->button, op->button->rect, text, FONT_SIZE);
