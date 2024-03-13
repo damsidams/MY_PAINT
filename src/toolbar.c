@@ -11,7 +11,7 @@
 
 int array_size(int nb)
 {
-    int array[] = {2, 4, 8, 16, 24};
+    int array[] = {4, 8, 16, 24};
 
     return array[nb];
 }
@@ -106,11 +106,10 @@ static drop_menu_t *init_size_selector(void)
     set_rect_text
         (selector->button, selector->button->rect, "Select size", FONT_SIZE);
     selector->options = NULL;
-    add_size_selector(selector, "2PX", Text, 0);
-    add_size_selector(selector, "4PX", Text, 1);
-    add_size_selector(selector, "8PX", Text, 2);
-    add_size_selector(selector, "16PX", Text, 3);
-    add_size_selector(selector, "24PX", Text, 4);
+    add_size_selector(selector, "4PX", Text, 0);
+    add_size_selector(selector, "8PX", Text, 1);
+    add_size_selector(selector, "16PX", Text, 2);
+    add_size_selector(selector, "24PX", Text, 3);
     return selector;
 }
 
