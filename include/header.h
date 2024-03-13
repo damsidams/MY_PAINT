@@ -51,6 +51,10 @@
     #define DRAW_WIDTH WIN_WIDTH
     #define DRAW_HEIGHT WIN_HEIGHT - TOP_BAR_HEIGHT - TOOL_BAR_HEIGHT
 
+/* draw zone infos */
+    #define HELP_WIDTH 650
+    #define HELP_HEIGHT 400
+
 enum e_gui_state {
     NONE = 0,
     HOVER,
@@ -139,6 +143,10 @@ void analyse_events(sfRenderWindow *win,
 // --> draw
 void draw_zone(sfImage *image, sfColor color);
 int mouse_in_draw_area(w_data_t *wdata);
-void draw_or_not(sfEvent *event, w_data_t *w_data);
+void draw_or_not(w_data_t *w_data);
+
+
+// --> help window
+sfSprite *help(void);
 
 #endif

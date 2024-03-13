@@ -21,6 +21,19 @@ void draw_zone(sfImage *image, sfColor color)
     }
 }
 
+sfSprite *help(void)
+{
+    sfVector2f position;
+    sfSprite *helpSprite = sfSprite_create();
+
+    sfTexture *img = sfTexture_createFromFile("src/assets/sprites/help.png", NULL);
+    sfSprite_setTexture(helpSprite, img, sfTrue);
+    sfSprite_setTextureRect(helpSprite, (sfIntRect){0, 0, 485, 307});
+    sfSprite_setScale(helpSprite, (sfVector2f){1, 1});
+    sfSprite_setPosition(helpSprite, position);
+    return helpSprite;
+}
+
 int mouse_in_draw_area(w_data_t *wdata)
 {
     sfVector2i mousePos = sfMouse_getPositionRenderWindow(wdata->win);
@@ -58,7 +71,7 @@ void draw_rect(w_data_t *wdata)
     }
 }
 
-void draw_or_not(sfEvent *event, w_data_t *w_data)
+void draw_or_not(w_data_t *w_data)
 {
     if (mouse_in_draw_area(w_data) && sfMouse_isButtonPressed(sfMouseLeft)) {
         draw_rect(w_data);
