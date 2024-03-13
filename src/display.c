@@ -21,6 +21,15 @@ int display_top_bar(sfRenderWindow *win, drop_menu_t **drop_menu)
     return SUCCESS;
 }
 
+static int display_tool_list(sfRenderWindow *win, options_t *tool_list)
+{
+    while (tool_list != NULL) {
+        sfRenderWindow_drawRectangleShape(win, tool_list->option->rect, NULL);
+        tool_list = tool_list->next;
+    }
+    return SUCCESS;
+}
+
 int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar)
 {
     if (win == NULL || toolbar == NULL) {
@@ -28,6 +37,6 @@ int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar)
         return ERROR;
     }
     sfRenderWindow_drawSprite(win, toolbar->sprite, sfFalse);
-    sfRenderWindow_drawRectangleShape(win, toolbar->button->rect, NULL);
+    display_tool_list(win, toolbar->tool_list);
     return SUCCESS;
 }

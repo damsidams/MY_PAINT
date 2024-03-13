@@ -73,7 +73,7 @@ typedef struct toolbar_s {
     sfSprite *sprite;
     sfImage *image;
     sfTexture *texture;
-    b_content_t *button;
+    options_t *tool_list;
 } toolbar_t;
 
 typedef struct win_content_s {
