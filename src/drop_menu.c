@@ -17,8 +17,10 @@ static int display_options(sfRenderWindow *win, drop_menu_t *menu)
         return ERROR;
     option_list = menu->options;
     while (option_list != NULL) {
-        if (option_list->button->txt != NULL)
+        if (option_list->button->txt != NULL) {
             sfRenderWindow_drawText(win, option_list->button->txt, NULL);
+            //printf("txt: %s\n", sfText_getString(option_list->button->txt));
+        }
         if (option_list->button->texture != NULL)
             sfRenderWindow_drawRectangleShape
                 (win, option_list->button->rect, NULL);
@@ -32,6 +34,8 @@ int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu)
     for (unsigned int i = 0; menu[i] != NULL; i++) {
         if (IS_HOVER(menu[i]->button) || IS_PRESSED(menu[i]->button))
             display_options(win, menu[i]);
+        if (i == 2)
+            run_help_event(menu[i]);
     }
     return SUCCESS;
 }
@@ -48,9 +52,11 @@ drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
     pos.y += size.y * rank_nb;
     op->button = init_button(pos, size);
     op->next = drop_menu->options;
-    if (mode == Text)
+    //printf("x: %f, y :%f\n", pos.x, pos.y);
+    if (mode == Text) {
         set_rect_text(op->button, op->button->rect, text, FONT_SIZE);
-    else if (mode == Image)
+        //printf("texte is set: %s\n", text);
+    } else if (mode == Image)
         set_rect_img(op->button, text);
     sfRectangleShape_setFillColor(op->button->rect, sfWhite);
     drop_menu->options = op;
