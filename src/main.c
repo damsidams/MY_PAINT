@@ -29,6 +29,7 @@ static int loop(w_data_t *w_data)
              (w_data->win, w_data->w_content->sprite, NULL);
         sfRenderWindow_display(w_data->win);
     }
+    save_file(w_data);
     return SUCCESS;
 }
 
