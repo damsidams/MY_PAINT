@@ -155,7 +155,8 @@ void draw_zone(sfImage *image, sfColor color);
 int mouse_in_draw_area(w_data_t *wdata);
 void draw_or_not(w_data_t *w_data);
 
-// --> help window
+// --> top menus
 sfSprite *help(void);
+void save_file(w_data_t *w_data);
 
 #endif

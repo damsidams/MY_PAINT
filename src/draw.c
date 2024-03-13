@@ -48,7 +48,6 @@ void draw_rect(w_data_t *wdata)
 
     if (wdata->w_content->draw->draw_mode == Erase)
         color = sfWhite;
-
     for (int x = 0; x < wdata->w_content->draw->size &&
         mousePos.x + x < DRAW_WIDTH; x++) {
         sfImage_setPixel
