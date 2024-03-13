@@ -9,6 +9,13 @@
 #include <SFML/Graphics.h>
 #include "header.h"
 
+int array_size(int nb)
+{
+    int array[] = {4, 8, 16, 24};
+
+    return array[nb];
+}
+
 static sfVector2f get_toolselector_pos(int tool_nb)
 {
     float x = (float)(TOOL_SELECTOR_X +
@@ -26,8 +33,9 @@ static options_t *add_size_selector(drop_menu_t *dm, char const *text,
     sfVector2f pos = sfRectangleShape_getPosition(dm->button->rect);
     sfVector2f size = {SIZE_SELECTOR_WIDTH, SIZE_SELECTOR_HEIGHT};
 
-    pos.y += SIZE_SELECTOR_HEIGHT * rank_nb;
+    pos.x += SIZE_SELECTOR_WIDTH * rank_nb;
     size_select->button = init_button(pos, size);
+    size_select->button->rank = rank_nb;
     size_select->next = dm->options;
     if (mode == Text)
         set_rect_text
@@ -35,6 +43,9 @@ static options_t *add_size_selector(drop_menu_t *dm, char const *text,
     else if (mode == Image)
         set_rect_img(size_select->button, text);
     dm->options = size_select;
+    sfRectangleShape_setOutlineColor(size_select->button->rect, sfBlack);
+    sfRectangleShape_setOutlineThickness
+        (size_select->button->rect, TOOL_SELECT_OT);
     return dm->options;
 }
 
@@ -86,22 +97,19 @@ static void init_toolbar_image(toolbar_t *toolbar, sfUint8 *pixel_array)
 static drop_menu_t *init_size_selector(void)
 {
     drop_menu_t *selector = malloc(sizeof(drop_menu_t));
-    sfVector2f pos = {(float)WIN_WIDTH / 2, (float)(TOP_BAR_HEIGHT +
+    sfVector2f pos = {
+        (float)WIN_WIDTH / 2 - 0.1 * WIN_WIDTH, (float)(TOP_BAR_HEIGHT +
         TOOL_BAR_POURCENTAGE * WIN_HEIGHT / 2 - SIZE_SELECTOR_HEIGHT / 2)};
     sfVector2f size = {SIZE_SELECTOR_WIDTH, SIZE_SELECTOR_HEIGHT};
 
     selector->button = init_button(pos, size);
     set_rect_text
         (selector->button, selector->button->rect, "Select size", FONT_SIZE);
-    sfRectangleShape_setOutlineColor(selector->button->rect, sfBlack);
-    sfRectangleShape_setOutlineThickness
-        (selector->button->rect, TOOL_SELECT_OT);
     selector->options = NULL;
-    add_size_selector(selector, "2PX", Text, 1);
-    add_size_selector(selector, "4PX", Text, 2);
-    add_size_selector(selector, "8PX", Text, 3);
-    add_size_selector(selector, "16PX", Text, 4);
-    add_size_selector(selector, "24PX", Text, 5);
+    add_size_selector(selector, "4PX", Text, 0);
+    add_size_selector(selector, "8PX", Text, 1);
+    add_size_selector(selector, "16PX", Text, 2);
+    add_size_selector(selector, "24PX", Text, 3);
     return selector;
 }
 

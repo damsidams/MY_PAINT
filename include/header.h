@@ -38,8 +38,8 @@
     #define TOOL_MARGIN 25
     #define TOOL_SELECTOR_SIZE 70
     #define TOOL_BAR_HEIGHT WIN_HEIGHT * TOOL_BAR_POURCENTAGE
-    #define SIZE_SELECTOR_WIDTH 100
-    #define SIZE_SELECTOR_HEIGHT 50
+    #define SIZE_SELECTOR_WIDTH 70
+    #define SIZE_SELECTOR_HEIGHT 40
     #define SIZE_SELECTOR_FONT_SIZE 8
 
 /* draw info */
@@ -65,6 +65,11 @@ enum e_gui_state {
 enum init_mode {
     Text,
     Image
+};
+
+enum draw_mode {
+    Pencil,
+    Erase
 };
 
 typedef struct button_content_s {
@@ -98,6 +103,7 @@ typedef struct toolbar_s {
 typedef struct draw_param_s {
     int size;
     sfColor color;
+    enum draw_mode draw_mode;
 } draw_param_t;
 
 typedef struct win_content_s {
@@ -132,13 +138,15 @@ sfBool set_rect_text(b_content_t *button, sfRectangleShape *rect,
 sfBool set_rect_img(b_content_t *button, char const *img_path);
 
 // --> display
-int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu);
 int display_top_bar(sfRenderWindow *win, drop_menu_t **drop_menu);
 int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar);
 
 // --> events
+int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu);
 void analyse_events(sfRenderWindow *win,
     win_content_t *wc, sfEvent *event);
+int run_tool_bar_event(win_content_t *wc);
+int array_size(int nb);
 
 // --> draw
 void draw_zone(sfImage *image, sfColor color);

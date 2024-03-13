@@ -30,6 +30,23 @@ static int display_tool_list(sfRenderWindow *win, options_t *tool_list)
     return SUCCESS;
 }
 
+static int display_size_selectors(sfRenderWindow *win, drop_menu_t *dm)
+{
+    options_t *list = dm->options;
+
+    if (dm == NULL) {
+        my_putstr_err("Error: size selector list is null\n");
+        return ERROR;
+    }
+    while (list != NULL) {
+        sfRenderWindow_drawRectangleShape
+            (win, list->button->rect, sfFalse);
+        sfRenderWindow_drawText(win, list->button->txt, sfFalse);
+        list = list->next;
+    }
+    return SUCCESS;
+}
+
 int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar)
 {
     if (win == NULL || toolbar == NULL) {
@@ -37,9 +54,7 @@ int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar)
         return ERROR;
     }
     sfRenderWindow_drawSprite(win, toolbar->sprite, sfFalse);
-    sfRenderWindow_drawRectangleShape
-        (win, toolbar->size_selector->button->rect, sfFalse);
-    sfRenderWindow_drawText(win, toolbar->size_selector->button->txt, sfFalse);
     display_tool_list(win, toolbar->tool_list);
+    display_size_selectors(win, toolbar->size_selector);
     return SUCCESS;
 }
