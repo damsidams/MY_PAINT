@@ -26,14 +26,14 @@ static options_t *add_tool_selector(toolbar_t *toolbar, char const *text,
     sfVector2f pos = get_toolselector_pos(rank_nb);
     sfVector2f size = {TOOL_SELECTOR_SIZE, TOOL_SELECTOR_SIZE};
 
-    tool->option = init_button(pos, size);
+    tool->button = init_button(pos, size);
     tool->next = toolbar->tool_list;
     if (mode == Text)
-        set_rect_text(tool->option, tool->option->rect, text, FONT_SIZE);
+        set_rect_text(tool->button, tool->button->rect, text, FONT_SIZE);
     else if (mode == Image)
-        set_rect_img(tool->option, text);
-    sfRectangleShape_setOutlineColor(tool->option->rect, sfBlack);
-    sfRectangleShape_setOutlineThickness(tool->option->rect, TOOL_SELECT_OT);
+        set_rect_img(tool->button, text);
+    sfRectangleShape_setOutlineColor(tool->button->rect, sfBlack);
+    sfRectangleShape_setOutlineThickness(tool->button->rect, TOOL_SELECT_OT);
     toolbar->tool_list = tool;
     return toolbar->tool_list;
 }

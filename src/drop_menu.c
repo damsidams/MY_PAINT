@@ -17,11 +17,11 @@ static int display_options(sfRenderWindow *win, drop_menu_t *menu)
         return ERROR;
     option_list = menu->options;
     while (option_list != NULL) {
-        if (option_list->option->txt != NULL)
-            sfRenderWindow_drawText(win, option_list->option->txt, NULL);
-        if (option_list->option->texture != NULL)
+        if (option_list->button->txt != NULL)
+            sfRenderWindow_drawText(win, option_list->button->txt, NULL);
+        if (option_list->button->texture != NULL)
             sfRenderWindow_drawRectangleShape
-                (win, option_list->option->rect, NULL);
+                (win, option_list->button->rect, NULL);
         option_list = option_list->next;
     }
     return SUCCESS;
@@ -46,13 +46,13 @@ drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
 
     drop_menu->button->rank = rank_nb;
     pos.y += size.y * rank_nb;
-    op->option = init_button(pos, size);
+    op->button= init_button(pos, size);
     op->next = drop_menu->options;
     if (mode == Text)
-        set_rect_text(op->option, op->option->rect, text, FONT_SIZE);
+        set_rect_text(op->button, op->button->rect, text, FONT_SIZE);
     else if (mode == Image)
-        set_rect_img(op->option, text);
-    sfRectangleShape_setFillColor(op->option->rect, sfWhite);
+        set_rect_img(op->button, text);
+    sfRectangleShape_setFillColor(op->button->rect, sfWhite);
     drop_menu->options = op;
     return drop_menu;
 }

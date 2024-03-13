@@ -24,7 +24,7 @@ int display_top_bar(sfRenderWindow *win, drop_menu_t **drop_menu)
 static int display_tool_list(sfRenderWindow *win, options_t *tool_list)
 {
     while (tool_list != NULL) {
-        sfRenderWindow_drawRectangleShape(win, tool_list->option->rect, NULL);
+        sfRenderWindow_drawRectangleShape(win, tool_list->button->rect, NULL);
         tool_list = tool_list->next;
     }
     return SUCCESS;

@@ -60,7 +60,7 @@ typedef struct button_content_s {
 } b_content_t;
 
 typedef struct options_s {
-    b_content_t *option;
+    b_content_t *button;
     struct options_s *next;
 } options_t;
 
