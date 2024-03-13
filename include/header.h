@@ -23,6 +23,7 @@
     #define FONTPATH "src/assets/font.ttf"
     #define PENCIL_PNG_PATH "src/assets/sprites/paint-brush.png"
     #define ERASER_PNG_PATH "src/assets/sprites/eraser.png"
+    #define HELP_PNG_PATH "src/assets/sprites/help.png"
 
 /* top nav bar */
 
@@ -33,7 +34,7 @@
 /* tool bar */
 
     #define TOOL_SELECTOR_X WIN_WIDTH * 0.2
-    #define TOOL_BAR_POURCENTAGE 0.2
+    #define TOOL_BAR_POURCENTAGE 0.15
     #define TOOL_SELECT_OT 2.3
     #define TOOL_MARGIN 25
     #define TOOL_SELECTOR_SIZE 70
@@ -152,7 +153,6 @@ int array_size(int nb);
 void draw_zone(sfImage *image, sfColor color);
 int mouse_in_draw_area(w_data_t *wdata);
 void draw_or_not(w_data_t *w_data);
-
 
 // --> help window
 sfSprite *help(void);

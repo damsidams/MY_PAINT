@@ -14,7 +14,7 @@ static int loop(w_data_t *w_data)
 {
     sfEvent event;
 
-    draw_zone(w_data->w_content->image, sfRed);
+    draw_zone(w_data->w_content->image, sfWhite);
     sfTexture_updateFromImage
         (w_data->w_content->texture, w_data->w_content->image, 0, 0);
     while (sfRenderWindow_isOpen(w_data->win)) {

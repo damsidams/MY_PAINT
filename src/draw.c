@@ -26,7 +26,7 @@ sfSprite *help(void)
     sfVector2f position;
     sfSprite *helpSprite = sfSprite_create();
 
-    sfTexture *img = sfTexture_createFromFile("src/assets/sprites/help.png", NULL);
+    sfTexture *img = sfTexture_createFromFile(HELP_PNG_PATH, NULL);
     sfSprite_setTexture(helpSprite, img, sfTrue);
     sfSprite_setTextureRect(helpSprite, (sfIntRect){0, 0, 485, 307});
     sfSprite_setScale(helpSprite, (sfVector2f){1, 1});
@@ -56,18 +56,21 @@ static sfVector2i mouse_to_array_pos(w_data_t *wdata)
 void draw_rect(w_data_t *wdata)
 {
     sfVector2i mousePos = mouse_to_array_pos(wdata);
+    sfColor color = wdata->w_content->draw->color;
+    int size = wdata->w_content->draw->size;
+
+    if (wdata->w_content->draw->draw_mode == Erase)
+        color = sfWhite;
 
     for (int x = 0; x < wdata->w_content->draw->size &&
         mousePos.x + x < DRAW_WIDTH; x++) {
         sfImage_setPixel
-            (wdata->w_content->image, mousePos.x + x,
-                mousePos.y, wdata->w_content->draw->color);
-        for (int y = 0; y < wdata->w_content->draw->size &&
+            (wdata->w_content->image, mousePos.x + x, mousePos.y, color);
+        for (int y = 0; y < size &&
             mousePos.y + y < DRAW_HEIGHT; y++)
             sfImage_setPixel
                 (wdata->w_content->image,
-                    mousePos.x + x, mousePos.y + y,
-                        wdata->w_content->draw->color);
+                    mousePos.x + x, mousePos.y + y, color);
     }
 }
 
