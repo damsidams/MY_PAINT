@@ -13,8 +13,6 @@
 
     #define WIN_HEIGHT 1080
     #define WIN_WIDTH 1920
-    #define DRAW_WIDTH 1280
-    #define DRAW_HEIGHT 720
     #define IS_PRESSED(button) (button->state == PRESSED)
     #define IS_HOVER(button) (button->state == HOVER)
     #define IS_RELEASED(button) (button->state == RELEASED)
@@ -39,11 +37,16 @@
     #define TOOL_SELECT_OT 2.3
     #define TOOL_MARGIN 25
     #define TOOL_SELECTOR_SIZE 70
+    #define TOOL_BAR_HEIGHT WIN_HEIGHT * TOOL_BAR_POURCENTAGE
 
 /* draw info */
 
     #define DEFAULT_DRAW_SIZE 2
     #define DEFAULT_DRAW_COLOR sfBlack
+
+/* draw zone infos */
+    #define DRAW_WIDTH WIN_WIDTH
+    #define DRAW_HEIGHT WIN_HEIGHT - TOP_BAR_HEIGHT - TOOL_BAR_HEIGHT
 
 enum e_gui_state {
     NONE = 0,
@@ -130,6 +133,8 @@ void analyse_events(sfRenderWindow *win,
     win_content_t *wc, sfEvent *event);
 
 // --> draw
-void draw_zone(sfImage *image);
+void draw_zone(sfImage *image, sfColor color);
+int mouse_in_draw_area(w_data_t *wdata);
+void draw_or_not(sfEvent *event, w_data_t *w_data);
 
 #endif

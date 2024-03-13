@@ -10,21 +10,15 @@
 #include <stdlib.h>
 #include "header.h"
 
-static void draw_line(sfImage *image, sfVector2i initial_pos,
-    int line_length, sfColor color)
-{
-    for (int i = 0; i < WIN_WIDTH && i < line_length; i++)
-        sfImage_setPixel(image, initial_pos.x + i, initial_pos.y, color);
-}
-
 static int loop(w_data_t *w_data)
 {
     sfEvent event;
 
-    draw_zone(w_data->w_content->image);
+    draw_zone(w_data->w_content->image, sfRed);
     sfTexture_updateFromImage
         (w_data->w_content->texture, w_data->w_content->image, 0, 0);
     while (sfRenderWindow_isOpen(w_data->win)) {
+        draw_or_not(&event, w_data);
         sfRenderWindow_pollEvent(w_data->win, &event);
         analyse_events(w_data->win,
             w_data->w_content, &event);
@@ -32,6 +26,8 @@ static int loop(w_data_t *w_data)
         sfRenderWindow_clear(w_data->win, sfWhite);
         display_top_bar(w_data->win, w_data->w_content->menu);
         display_tool_bar(w_data->win, w_data->w_content->toolbar);
+        sfRenderWindow_drawSprite
+            (w_data->win, w_data->w_content->sprite, NULL);
     }
     return SUCCESS;
 }

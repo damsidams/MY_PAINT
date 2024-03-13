@@ -68,7 +68,7 @@ static win_content_t *init_win_content(void)
     sfUint8 *buffer = init_pixel_array();
     sfIntRect image_rect = {0, 0, DRAW_WIDTH, DRAW_HEIGHT};
     sfVector2f start = {(WIN_WIDTH / 2) - (DRAW_WIDTH / 2),
-        (WIN_HEIGHT / 2) - (DRAW_HEIGHT / 2)};
+        (TOP_BAR_HEIGHT + WIN_HEIGHT * TOOL_BAR_POURCENTAGE)};
 
     if (buffer == NULL || wc == NULL)
         return NULL;
