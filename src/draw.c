@@ -40,24 +40,28 @@ static sfVector2i mouse_to_array_pos(w_data_t *wdata)
     return mousePosInArraw;
 }
 
-void draw_rect(int size, sfColor color, w_data_t *wdata)
+void draw_rect(w_data_t *wdata)
 {
     sfVector2i mousePos = mouse_to_array_pos(wdata);
 
-    for (int x = 0; x < size && mousePos.x + x < DRAW_WIDTH; x++) {
+    for (int x = 0; x < wdata->w_content->draw->size &&
+        mousePos.x + x < DRAW_WIDTH; x++) {
         sfImage_setPixel
-            (wdata->w_content->image, mousePos.x + x, mousePos.y, color);
-        for (int y = 0; y < size && mousePos.y + y < DRAW_HEIGHT; y++)
+            (wdata->w_content->image, mousePos.x + x,
+                mousePos.y, wdata->w_content->draw->color);
+        for (int y = 0; y < wdata->w_content->draw->size &&
+            mousePos.y + y < DRAW_HEIGHT; y++)
             sfImage_setPixel
                 (wdata->w_content->image,
-                    mousePos.x + x, mousePos.y + y, color);
+                    mousePos.x + x, mousePos.y + y,
+                        wdata->w_content->draw->color);
     }
 }
 
 void draw_or_not(sfEvent *event, w_data_t *w_data)
 {
     if (mouse_in_draw_area(w_data) && sfMouse_isButtonPressed(sfMouseLeft)) {
-        draw_rect(15, sfBlack, w_data);
+        draw_rect(w_data);
         sfTexture_updateFromImage
             (w_data->w_content->texture, w_data->w_content->image, 0, 0);
     }
