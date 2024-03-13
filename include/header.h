@@ -148,6 +148,7 @@ void analyse_events(sfRenderWindow *win,
     win_content_t *wc, sfEvent *event);
 int run_tool_bar_event(win_content_t *wc);
 int array_size(int nb);
+void run_help_event(drop_menu_t *dm);
 
 // --> draw
 void draw_zone(sfImage *image, sfColor color);

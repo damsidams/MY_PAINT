@@ -8,6 +8,19 @@
 #include <SFML/Graphics.h>
 #include "header.h"
 
+static void analyse_top_section_event(drop_menu_t *menu, sfEvent *event)
+{
+    options_t *list = menu->options;
+
+    while (list != NULL) {
+        if (event->type == sfEvtMouseMoved)
+            list->button->is_hover(list->button, &event->mouseMove);
+        if (event->type == sfEvtMouseButtonPressed)
+            list->button->is_clicked(list->button, &event->mouseButton);
+        list = list->next;
+    }
+}
+
 static void analyse_top_bar_event(drop_menu_t **menu, sfEvent *event)
 {
     for (unsigned int i = 0; menu[i] != NULL; i++) {
@@ -17,6 +30,7 @@ static void analyse_top_bar_event(drop_menu_t **menu, sfEvent *event)
         if (event->type == sfEvtMouseButtonPressed)
             (*(menu[i])->button->is_clicked)
                 ((menu[i]->button), &event->mouseButton);
+        analyse_top_section_event(menu[i], event);
     }
 }
 
