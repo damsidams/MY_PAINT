@@ -20,6 +20,27 @@ static void analyse_top_bar_event(drop_menu_t **menu, sfEvent *event)
     }
 }
 
+static void analyse_tool_bar_event(toolbar_t *toolbar, sfEvent *event)
+{
+    options_t *list = toolbar->tool_list;
+    options_t *s_list = toolbar->size_selector->options;
+
+    while (list != NULL) {
+        if (event->type == sfEvtMouseMoved)
+            list->button->is_hover(list->button, &event->mouseMove);
+        if (event->type == sfEvtMouseButtonPressed)
+            list->button->is_clicked(list->button, &event->mouseButton);
+        list = list->next;
+    }
+    while (s_list != NULL) {
+        if (event->type == sfEvtMouseMoved)
+            s_list->button->is_hover(s_list->button, &event->mouseMove);
+        if (event->type == sfEvtMouseButtonPressed)
+            s_list->button->is_clicked(s_list->button, &event->mouseButton);
+        s_list = s_list->next;
+    }
+}
+
 void analyse_events(sfRenderWindow *win,
     win_content_t *wc, sfEvent *event)
 {
@@ -28,4 +49,5 @@ void analyse_events(sfRenderWindow *win,
         sfRenderWindow_close(win);
     analyse_top_bar_event(wc->menu, event);
     run_top_bar_event(win, wc->menu);
+    analyse_tool_bar_event(wc->toolbar, event);
 }
