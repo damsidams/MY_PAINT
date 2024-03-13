@@ -37,6 +37,9 @@ int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar)
         return ERROR;
     }
     sfRenderWindow_drawSprite(win, toolbar->sprite, sfFalse);
+    sfRenderWindow_drawRectangleShape
+        (win, toolbar->size_selector->button->rect, sfFalse);
+    sfRenderWindow_drawText(win, toolbar->size_selector->button->txt, sfFalse);
     display_tool_list(win, toolbar->tool_list);
     return SUCCESS;
 }

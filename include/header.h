@@ -39,6 +39,9 @@
     #define TOOL_SELECT_OT 2.3
     #define TOOL_MARGIN 25
     #define TOOL_SELECTOR_SIZE 70
+    #define SIZE_SELECTOR_WIDTH 100
+    #define SIZE_SELECTOR_HEIGHT 50
+    #define SIZE_SELECTOR_FONT_SIZE 8
 
 /* draw info */
 
@@ -82,6 +85,7 @@ typedef struct toolbar_s {
     sfImage *image;
     sfTexture *texture;
     options_t *tool_list;
+    drop_menu_t *size_selector;
 } toolbar_t;
 
 typedef struct draw_param_s {
