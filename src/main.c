@@ -26,7 +26,7 @@ static int loop(w_data_t *w_data)
         display_top_bar(w_data->win, w_data->w_content->menu);
         display_tool_bar(w_data->win, w_data->w_content->toolbar);
         sfRenderWindow_drawSprite
-             (w_data->win, w_data->w_content->sprite, NULL);
+            (w_data->win, w_data->w_content->sprite, NULL);
         sfRenderWindow_display(w_data->win);
     }
     save_file(w_data);

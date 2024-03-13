@@ -25,8 +25,8 @@ sfSprite *help(void)
 {
     sfVector2f position;
     sfSprite *helpSprite = sfSprite_create();
-
     sfTexture *img = sfTexture_createFromFile(HELP_PNG_PATH, NULL);
+
     sfSprite_setTexture(helpSprite, img, sfTrue);
     sfSprite_setTextureRect(helpSprite, (sfIntRect){0, 0, 485, 307});
     sfSprite_setScale(helpSprite, (sfVector2f){1, 1});
@@ -61,7 +61,6 @@ void draw_rect(w_data_t *wdata)
 
     if (wdata->w_content->draw->draw_mode == Erase)
         color = sfWhite;
-
     for (int x = 0; x < wdata->w_content->draw->size &&
         mousePos.x + x < DRAW_WIDTH; x++) {
         sfImage_setPixel
