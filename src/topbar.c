@@ -11,5 +11,5 @@
 
 void save_file(w_data_t *w_data)
 {
-    sfImage_saveToFile(w_data->w_content->image, "creation.png");
+    sfImage_saveToFile(w_data->w_content->image, "creation.jpg");
 }
