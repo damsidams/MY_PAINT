@@ -59,6 +59,7 @@ static void init_draw(win_content_t *wc)
 
     draw->size = DEFAULT_DRAW_SIZE;
     draw->color = DEFAULT_DRAW_COLOR;
+    draw->draw_mode = Pencil;
     wc->draw = draw;
 }
 

@@ -9,6 +9,13 @@
 #include <SFML/Graphics.h>
 #include "header.h"
 
+int array_size(int nb)
+{
+    int array[] = {2, 4, 8, 16, 24};
+
+    return array[nb];
+}
+
 static sfVector2f get_toolselector_pos(int tool_nb)
 {
     float x = (float)(TOOL_SELECTOR_X +
@@ -28,6 +35,7 @@ static options_t *add_size_selector(drop_menu_t *dm, char const *text,
 
     pos.x += SIZE_SELECTOR_WIDTH * rank_nb;
     size_select->button = init_button(pos, size);
+    size_select->button->rank = rank_nb;
     size_select->next = dm->options;
     if (mode == Text)
         set_rect_text
