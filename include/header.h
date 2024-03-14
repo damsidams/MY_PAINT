@@ -23,6 +23,7 @@
     #define FONTPATH "src/assets/font.ttf"
     #define PENCIL_PNG_PATH "src/assets/sprites/paint-brush.png"
     #define ERASER_PNG_PATH "src/assets/sprites/eraser.png"
+    #define COLOR_PICKER_PNG_PATH "src/assets/sprites/color_roulette.png"
 
 /* top nav bar */
 
@@ -41,6 +42,8 @@
     #define SIZE_SELECTOR_WIDTH 70
     #define SIZE_SELECTOR_HEIGHT 40
     #define SIZE_SELECTOR_FONT_SIZE 8
+    #define COLOR_PICKER_RADIUS TOOL_BAR_HEIGHT / 2 * 0.8
+    #define COLOR_PICKER_X WIN_WIDTH * 0.8
 
 /* draw info */
 
@@ -68,6 +71,12 @@ enum draw_mode {
     Erase
 };
 
+typedef struct picker_s {
+    sfCircleShape *circle;
+    sfTexture *texture;
+    sfImage *image;
+} picker_t;
+
 typedef struct button_content_s {
     sfRectangleShape *rect;
     sfText *txt;
@@ -94,6 +103,7 @@ typedef struct toolbar_s {
     sfTexture *texture;
     options_t *tool_list;
     drop_menu_t *size_selector;
+    picker_t *color_picker;
 } toolbar_t;
 
 typedef struct draw_param_s {
@@ -127,6 +137,8 @@ drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
 sfUint8 *init_pixel_array(void);
 w_data_t *init_win(void);
 toolbar_t *init_toolbar(void);
+void init_color_picker(toolbar_t *toolbar);
+void init_color_picker(toolbar_t *toolbar);
 
 // --> button
 sfBool set_rect_text(b_content_t *button, sfRectangleShape *rect,
@@ -143,6 +155,7 @@ void analyse_events(sfRenderWindow *win,
     win_content_t *wc, sfEvent *event);
 int run_tool_bar_event(win_content_t *wc);
 int array_size(int nb);
+void color_pick_event(win_content_t *wc, toolbar_t *toolbar, sfEvent *event);
 
 // --> draw
 void draw_zone(sfImage *image, sfColor color);
