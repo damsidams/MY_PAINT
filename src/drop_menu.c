@@ -46,9 +46,9 @@ drop_menu_t *add_option_drop_menu(drop_menu_t *drop_menu, char const *text,
     sfVector2f pos = sfRectangleShape_getPosition(rect);
     sfVector2f size = sfRectangleShape_getSize(rect);
 
-    drop_menu->button->rank = rank_nb;
     pos.y += size.y * rank_nb;
     op->button = init_button(pos, size);
+    op->button->rank = rank_nb;
     op->next = drop_menu->options;
     if (mode == Text)
         set_rect_text(op->button, op->button->rect, text, FONT_SIZE);
