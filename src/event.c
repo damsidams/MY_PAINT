@@ -105,5 +105,6 @@ void analyse_events(sfRenderWindow *win,
     analyse_top_bar_event(wc->menu, event);
     run_top_bar_event(win, wc->menu);
     analyse_tool_bar_event(wc->toolbar, event);
+    color_pick_event(wc, wc->toolbar, event);
     run_tool_bar_event(wc);
 }
