@@ -23,7 +23,7 @@
     #define FONTPATH "src/assets/font.ttf"
     #define PENCIL_PNG_PATH "src/assets/sprites/paint-brush.png"
     #define ERASER_PNG_PATH "src/assets/sprites/eraser.png"
-    #define COLOR_PICKER_PNG_PATH "src/assets/sprites/color_roulette.png"
+    #define COLOR_PICKER_PNG_PATH "src/assets/sprites/color_palette.png"
 
 /* top nav bar */
 
@@ -42,8 +42,11 @@
     #define SIZE_SELECTOR_WIDTH 70
     #define SIZE_SELECTOR_HEIGHT 40
     #define SIZE_SELECTOR_FONT_SIZE 8
-    #define COLOR_PICKER_RADIUS TOOL_BAR_HEIGHT / 2 * 0.8
+    #define COLOR_PICKER_HEIGHT TOOL_BAR_HEIGHT * 0.8
+    #define COLOR_PICKER_WIDTH COLOR_PICKER_HEIGHT * 1.5
     #define COLOR_PICKER_X WIN_WIDTH * 0.8
+    #define CP_IMAGE_WIDTH 820
+    #define CP_IMAGE_HEIGHT 528
 
 /* draw info */
 
@@ -72,7 +75,7 @@ enum draw_mode {
 };
 
 typedef struct picker_s {
-    sfCircleShape *circle;
+    sfRectangleShape *rect;
     sfTexture *texture;
     sfImage *image;
 } picker_t;
