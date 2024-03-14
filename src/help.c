@@ -33,5 +33,4 @@ void run_help_event(drop_menu_t *dm)
         return;
     if (IS_PRESSED(list->button))
         help();
-
 }

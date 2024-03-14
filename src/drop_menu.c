@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "header.h"
 
-static int display_options(sfRenderWindow *win, drop_menu_t *menu)
+int display_options(sfRenderWindow *win, drop_menu_t *menu)
 {
     options_t *option_list;
 
@@ -23,17 +23,6 @@ static int display_options(sfRenderWindow *win, drop_menu_t *menu)
             sfRenderWindow_drawRectangleShape
                 (win, option_list->button->rect, NULL);
         option_list = option_list->next;
-    }
-    return SUCCESS;
-}
-
-int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu)
-{
-    for (unsigned int i = 0; menu[i] != NULL; i++) {
-        if (IS_HOVER(menu[i]->button) || IS_PRESSED(menu[i]->button))
-            display_options(win, menu[i]);
-        if (i == 2)
-            run_help_event(menu[i]);
     }
     return SUCCESS;
 }

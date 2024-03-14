@@ -31,6 +31,8 @@
     #define DROP_MENU_NB 3
     #define TOP_BAR_HEIGHT 50
     #define TOP_BAR_WIDTH 100
+    #define SAVE_NAME "creation.jpg"
+    #define SAVE_COOLDOWN 3.0
 
 /* tool bar */
 
@@ -156,9 +158,11 @@ sfBool set_rect_img(b_content_t *button, char const *img_path);
 // --> display
 int display_top_bar(sfRenderWindow *win, drop_menu_t **drop_menu);
 int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar);
+int display_options(sfRenderWindow *win, drop_menu_t *menu);
 
 // --> events
-int run_top_bar_event(sfRenderWindow *win, drop_menu_t **menu);
+int run_top_bar_event(win_content_t *wc,
+    sfRenderWindow *win, drop_menu_t **menu);
 void analyse_events(sfRenderWindow *win,
     win_content_t *wc, sfEvent *event);
 int run_tool_bar_event(win_content_t *wc);
@@ -173,6 +177,5 @@ void draw_or_not(w_data_t *w_data);
 
 // --> top menus
 sfSprite *help(void);
-void save_file(w_data_t *w_data);
 
 #endif
