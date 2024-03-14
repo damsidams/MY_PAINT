@@ -50,7 +50,7 @@
 
 /* draw info */
 
-    #define DEFAULT_DRAW_SIZE 2
+    #define DEFAULT_DRAW_SIZE 8
     #define DEFAULT_DRAW_COLOR sfBlack
 
 /* draw zone infos */

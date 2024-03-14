@@ -56,6 +56,7 @@ int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar)
     sfRenderWindow_drawSprite(win, toolbar->sprite, sfFalse);
     display_tool_list(win, toolbar->tool_list);
     display_size_selectors(win, toolbar->size_selector);
-    sfRenderWindow_drawRectangleShape(win, toolbar->color_picker->rect, sfFalse);
+    sfRenderWindow_drawRectangleShape
+        (win, toolbar->color_picker->rect, sfFalse);
     return SUCCESS;
 }
