@@ -123,8 +123,8 @@ toolbar_t *init_toolbar(void)
         return NULL;
     init_toolbar_image(toolbar, pixel_array);
     toolbar->tool_list = NULL;
-    add_tool_selector(toolbar, PENCIL_PNG_PATH, Image, 0);
-    add_tool_selector(toolbar, ERASER_PNG_PATH, Image, 1);
+    add_tool_selector(toolbar, ERASER_PNG_PATH, Image, 0);
+    add_tool_selector(toolbar, PENCIL_PNG_PATH, Image, 1);
     toolbar->size_selector = init_size_selector();
     init_color_picker(toolbar);
     return toolbar;
