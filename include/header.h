@@ -27,6 +27,7 @@
     #define PENCIL_PNG_PATH "src/assets/sprites/paint-brush.png"
     #define ERASER_PNG_PATH "src/assets/sprites/eraser.png"
     #define HELP_PNG_PATH "src/assets/sprites/help.png"
+    #define ABOUT_PNG_PATH "src/assets/sprites/help.png"
     #define COLOR_PICKER_PNG_PATH "src/assets/sprites/color_palette.png"
     #define SQUARE_PNG_PATH "src/assets/sprites/square.png"
     #define CIRCLE_PNG_PATH "src/assets/sprites/circle.png"
