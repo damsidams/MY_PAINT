@@ -27,6 +27,7 @@ static options_t *add_tool_selector(toolbar_t *toolbar, char const *text,
     sfVector2f size = {SHAPE_SELECTOR_SIZE, SHAPE_SELECTOR_SIZE};
 
     shape->button = init_button(pos, size);
+    shape->button->rank = rank_nb;
     shape->next = toolbar->shape_list;
     if (mode == Text)
         set_rect_text(shape->button, shape->button->rect, text, FONT_SIZE);
@@ -43,6 +44,6 @@ static options_t *add_tool_selector(toolbar_t *toolbar, char const *text,
 void init_shape_selector(toolbar_t *toolbar)
 {
     toolbar->shape_list = NULL;
-    add_tool_selector(toolbar, SQUARE_PNG_PATH, Image, 0);
-    add_tool_selector(toolbar, CIRCLE_PNG_PATH, Image, 1);
+    add_tool_selector(toolbar, SQUARE_PNG_PATH, Image, 1);
+    add_tool_selector(toolbar, CIRCLE_PNG_PATH, Image, 0);
 }
