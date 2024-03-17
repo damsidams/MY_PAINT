@@ -158,7 +158,6 @@ typedef struct win_content_s {
 typedef struct w_data_s {
     sfRenderWindow *win;
     win_content_t *w_content;
-    //struct sprite_list_s *sprites_list;
 } w_data_t;
 
 /*functions definition*/
@@ -200,5 +199,8 @@ void color_pick_event(win_content_t *wc, toolbar_t *toolbar, sfEvent *event);
 void draw_zone(sfImage *image, sfColor color);
 int mouse_in_draw_area(w_data_t *wdata);
 void draw_or_not(w_data_t *w_data);
+
+// --> free
+void free_everything(w_data_t *w_data);
 
 #endif

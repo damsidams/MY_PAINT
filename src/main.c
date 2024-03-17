@@ -29,12 +29,17 @@ static int loop(w_data_t *w_data)
     return SUCCESS;
 }
 
-int main(void)
+int main(int ac, char **av)
 {
-    w_data_t *w_data = init_win();
+    w_data_t *w_data = NULL;
 
+    (void)av;
+    if (ac != 1)
+        return ERROR;
+    w_data = init_win();
     if (w_data == NULL)
         return ERROR;
     loop(w_data);
-    return 0;
+    free_everything(w_data);
+    return SUCCESS;
 }
