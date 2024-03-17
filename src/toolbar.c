@@ -127,5 +127,6 @@ toolbar_t *init_toolbar(void)
     add_tool_selector(toolbar, PENCIL_PNG_PATH, Image, 1);
     toolbar->size_selector = init_size_selector();
     init_color_picker(toolbar);
+    init_shape_selector(toolbar);
     return toolbar;
 }

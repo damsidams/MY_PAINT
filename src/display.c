@@ -47,6 +47,22 @@ static int display_size_selectors(sfRenderWindow *win, drop_menu_t *dm)
     return SUCCESS;
 }
 
+static int display_shape_selectors(sfRenderWindow *win, options_t *shape_list)
+{
+    options_t *list = shape_list;
+
+    if (shape_list == NULL) {
+        my_putstr_err("Error: shape selector list is null\n");
+        return ERROR;
+    }
+    while (list != NULL) {
+        sfRenderWindow_drawRectangleShape
+            (win, list->button->rect, sfFalse);
+        list = list->next;
+    }
+    return SUCCESS;
+}
+
 int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar)
 {
     if (win == NULL || toolbar == NULL) {
@@ -56,6 +72,7 @@ int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar)
     sfRenderWindow_drawSprite(win, toolbar->sprite, sfFalse);
     display_tool_list(win, toolbar->tool_list);
     display_size_selectors(win, toolbar->size_selector);
+    display_shape_selectors(win, toolbar->shape_list);
     sfRenderWindow_drawRectangleShape
         (win, toolbar->color_picker->rect, sfFalse);
     return SUCCESS;

@@ -20,11 +20,16 @@
     #define SUCCESS 0
     #define BITS_PER_PIXEL 32
     #define FONT_SIZE 16
+
+/* path */
+
     #define FONTPATH "src/assets/font.ttf"
     #define PENCIL_PNG_PATH "src/assets/sprites/paint-brush.png"
     #define ERASER_PNG_PATH "src/assets/sprites/eraser.png"
     #define HELP_PNG_PATH "src/assets/sprites/help.png"
     #define COLOR_PICKER_PNG_PATH "src/assets/sprites/color_palette.png"
+    #define SQUARE_PNG_PATH "src/assets/sprites/square.png"
+    #define CIRCLE_PNG_PATH "src/assets/sprites/circle.png"
 
 /* top nav bar */
 
@@ -50,6 +55,9 @@
     #define COLOR_PICKER_X WIN_WIDTH * 0.8
     #define CP_IMAGE_WIDTH 820
     #define CP_IMAGE_HEIGHT 528
+    #define SHAPE_SELECTOR_X WIN_WIDTH * 0.6
+    #define SHAPE_SELECTOR_SIZE TOOL_SELECTOR_SIZE
+    #define SHAPE_SELECTOR_OT TOOL_SELECT_OT
 
 /* draw info */
 
@@ -74,6 +82,11 @@ enum e_gui_state {
 enum init_mode {
     Text,
     Image
+};
+
+enum shape_mode {
+    Circle = 0,
+    Square = 1
 };
 
 enum draw_mode {
@@ -112,6 +125,7 @@ typedef struct toolbar_s {
     sfImage *image;
     sfTexture *texture;
     options_t *tool_list;
+    options_t *shape_list;
     drop_menu_t *size_selector;
     picker_t *color_picker;
 } toolbar_t;
@@ -120,6 +134,7 @@ typedef struct draw_param_s {
     int size;
     sfColor color;
     enum draw_mode draw_mode;
+    enum shape_mode shape;
 } draw_param_t;
 
 typedef struct win_content_s {
@@ -149,6 +164,7 @@ w_data_t *init_win(void);
 toolbar_t *init_toolbar(void);
 void init_color_picker(toolbar_t *toolbar);
 void init_color_picker(toolbar_t *toolbar);
+void init_shape_selector(toolbar_t *toolbar);
 
 // --> button
 sfBool set_rect_text(b_content_t *button, sfRectangleShape *rect,

@@ -34,6 +34,19 @@ static void analyse_top_bar_event(drop_menu_t **menu, sfEvent *event)
     }
 }
 
+static void shape_selector_event(toolbar_t *toolbar, sfEvent *event)
+{
+    options_t *list = toolbar->shape_list;
+
+    while (list != NULL) {
+        if (event->type == sfEvtMouseMoved)
+            list->button->is_hover(list->button, &event->mouseMove);
+        if (event->type == sfEvtMouseButtonPressed)
+            list->button->is_clicked(list->button, &event->mouseButton);
+        list = list->next;
+    }
+}
+
 static void analyse_tool_bar_event(toolbar_t *toolbar, sfEvent *event)
 {
     options_t *list = toolbar->tool_list;
@@ -53,6 +66,7 @@ static void analyse_tool_bar_event(toolbar_t *toolbar, sfEvent *event)
             s_list->button->is_clicked(s_list->button, &event->mouseButton);
         s_list = s_list->next;
     }
+    shape_selector_event(toolbar, event);
 }
 
 static void run_toolselector_event(win_content_t *wc)
@@ -89,10 +103,29 @@ static void run_size_selector_event(win_content_t *wc)
     }
 }
 
+static void run_shape_selector_event(win_content_t *wc)
+{
+    unsigned int shape_nb = 0;
+    options_t *list = wc->toolbar->shape_list;
+
+    while (list != NULL) {
+        if (IS_HOVER(list->button) || IS_PRESSED(list->button)
+            || shape_nb == wc->draw->shape)
+            sfRectangleShape_setOutlineColor(list->button->rect, sfYellow);
+        else
+            sfRectangleShape_setOutlineColor(list->button->rect, sfBlack);
+        if (IS_PRESSED(list->button))
+            wc->draw->shape = list->button->rank;
+        shape_nb++;
+        list = list->next;
+    }
+}
+
 int run_tool_bar_event(win_content_t *wc)
 {
     run_toolselector_event(wc);
     run_size_selector_event(wc);
+    run_shape_selector_event(wc);
     return SUCCESS;
 }
 

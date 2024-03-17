@@ -21,6 +21,7 @@ SRC     =	src/main.c	\
 		src/help.c	\
 		src/topbar.c	\
 		src/color_picker.c	\
+		src/shape.c	\
 
 CRFLAGS	=	--coverage -lcriterion
 
