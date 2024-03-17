@@ -83,6 +83,7 @@ static win_content_t *init_win_content(void)
     sfSprite_setTextureRect(wc->sprite, image_rect);
     sfSprite_setPosition(wc->sprite, start);
     wc->toolbar = init_toolbar();
+    wc->help = NULL;
     init_draw(wc);
     return wc;
 }

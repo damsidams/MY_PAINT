@@ -73,6 +73,13 @@
     #define HELP_WIDTH 650
     #define HELP_HEIGHT 400
 
+/* help */
+
+    #define HELP_MSG_WIDTH 485
+    #define HELP_MSG_HEIGHT 307
+    #define ABOUT_WIDTH 251
+    #define ABOUT_HEIGHT 51
+
 enum e_gui_state {
     NONE = 0,
     HOVER,
@@ -145,6 +152,7 @@ typedef struct win_content_s {
     sfTexture *texture;
     toolbar_t *toolbar;
     draw_param_t *draw;
+    sfSprite *help;
 } win_content_t;
 
 typedef struct w_data_s {
@@ -173,6 +181,7 @@ sfBool set_rect_text(b_content_t *button, sfRectangleShape *rect,
 sfBool set_rect_img(b_content_t *button, char const *img_path);
 
 // --> display
+void display(w_data_t *w_data);
 int display_top_bar(sfRenderWindow *win, drop_menu_t **drop_menu);
 int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar);
 int display_options(sfRenderWindow *win, drop_menu_t *menu);
@@ -184,15 +193,12 @@ void analyse_events(sfRenderWindow *win,
     win_content_t *wc, sfEvent *event);
 int run_tool_bar_event(win_content_t *wc);
 int array_size(int nb);
-void run_help_event(drop_menu_t *dm);
+void run_help_event(win_content_t *wc, drop_menu_t *dm);
 void color_pick_event(win_content_t *wc, toolbar_t *toolbar, sfEvent *event);
 
 // --> draw
 void draw_zone(sfImage *image, sfColor color);
 int mouse_in_draw_area(w_data_t *wdata);
 void draw_or_not(w_data_t *w_data);
-
-// --> top menus
-sfSprite *help(void);
 
 #endif

@@ -15,8 +15,9 @@ static void analyse_top_section_event(drop_menu_t *menu, sfEvent *event)
     while (list != NULL) {
         if (event->type == sfEvtMouseMoved)
             list->button->is_hover(list->button, &event->mouseMove);
-        if (event->type == sfEvtMouseButtonPressed)
+        if (event->type == sfEvtMouseButtonPressed) {
             list->button->is_clicked(list->button, &event->mouseButton);
+        }
         list = list->next;
     }
 }

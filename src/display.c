@@ -77,3 +77,13 @@ int display_tool_bar(sfRenderWindow *win, toolbar_t *toolbar)
         (win, toolbar->color_picker->rect, sfFalse);
     return SUCCESS;
 }
+
+void display(w_data_t *w_data)
+{
+    sfRenderWindow_drawSprite
+            (w_data->win, w_data->w_content->sprite, NULL);
+    display_top_bar(w_data->win, w_data->w_content->menu);
+    display_tool_bar(w_data->win, w_data->w_content->toolbar);
+    if (w_data->w_content->help != NULL)
+        sfRenderWindow_drawSprite(w_data->win, w_data->w_content->help, NULL);
+}

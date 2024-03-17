@@ -62,7 +62,7 @@ int run_top_bar_event(win_content_t *wc,
         if (i == 0)
             run_file_event(wc, menu[i]);
         if (i == 2)
-            run_help_event(menu[i]);
+            run_help_event(wc, menu[i]);
     }
     return SUCCESS;
 }
