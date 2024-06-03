@@ -2,7 +2,7 @@
 
 ## A Brush with CSFML! ##
 
-Recreate your artistic vision with MY_PAINT, a first-year Epitech project inspired by the classic MS Paint application. This project utilizes the CSFML library for graphics rendering.
+First-year Epitech project that aims to reproduce the classic MS Paint application. This project utilizes the CSFML library for graphics rendering.
 
 ## Features: ##
 
